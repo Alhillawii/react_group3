@@ -1,0 +1,17 @@
+http://127.0.0.1:8000/api/contactus/messages
+
+for all messages
+
+get method
+
+http://127.0.0.1:8000/api/contactus/addmessage
+
+for adding message
+
+post method
+
+http://127.0.0.1:8000/api/contactus/delete/{id}
+
+for deleteing message , you have to give it an id
+
+delete method
