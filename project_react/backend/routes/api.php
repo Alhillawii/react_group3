@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/contactus/messages',[ContactusController::class,'index']);
 Route::post('/contactus/addmessage',[ContactusController::class,'store']);
+Route::delete('/contactus/delete/{id}',[ContactusController::class, 'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

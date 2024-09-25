@@ -77,8 +77,20 @@ class ContactusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(contactus $contactus)
+    public function destroy($id)
     {
-        //
+        $message = contactus::findOrFail($id);
+        if ($message) {
+            # code...
+            try {
+                $message->delete();
+                return response()->json(['message' => 'the message has been deleted']);
+            } catch (Exception $e) {
+                return response()->json(['message' => 'some thing went rong : ' .$e->getMessage()],500);
+            }
+        } else {
+            return response()->json(['message' => 'message not found'],404);
+        }
+
     }
 }
