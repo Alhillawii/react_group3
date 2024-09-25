@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\contactusrequeste;
 use App\Models\contactus;
+use Exception;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ContactusController extends Controller
 {
@@ -12,23 +16,40 @@ class ContactusController extends Controller
      */
     public function index()
     {
-        //
+        $messages = contactus::all();
+
+        if (isEmpty($messages)) {
+            # code...
+            return response()->json(['message' => 'sorry no messages'],401);
+
+        } else {
+            # code...
+            return response()->json(['messages'=> $messages, 'message' => 'here is the messages'],200);
+        }
+
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // i removes the create function becuse we are going to make it using react
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(contactusrequeste $request)
     {
-        //
+        try {
+            contactus::create(
+                [
+                    'name' => $request->name,
+                    'title' => $request->title,
+                    'description' => $request->description,
+                ]
+            );
+
+            return response()->json(['message' => 'thank you your message has been reseve'],200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'something went rong : ' . $e->getMessage()]);
+        }
     }
 
     /**
