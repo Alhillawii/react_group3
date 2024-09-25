@@ -25,19 +25,17 @@ class contactusrequeste extends FormRequest
             # code...
 
             return [
-                'name'=>'string|required|max:225',
-                'title'=>'string|required|max:225',
-                'description'=>'text|required|max:1000',
-
+                'name' => 'string|required|max:225',
+                'title' => 'string|required|max:225',
+                'message' => 'string|required|max:1000',  // Allows up to 1000 characters
             ];
         } else {
             # code...
 
             return [
-                'name'=>'string|required|max:225',
-                'title'=>'string|required|max:225',
-                'description'=>'text|required|max:1000',
-
+                'name' => 'string|required|max:225',
+                'title' => 'string|required|max:225',
+                'message' => 'string|required|max:1000',  // Allows up to 1000 characters
             ];
         }
 

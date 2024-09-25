@@ -18,9 +18,9 @@ class ContactusController extends Controller
     {
         $messages = contactus::all();
 
-        if (isEmpty($messages)) {
+        if (!$messages) {
             # code...
-            return response()->json(['message' => 'sorry no messages'],401);
+            return response()->json(['message' => 'sorry no messages']);
 
         } else {
             # code...
@@ -38,17 +38,15 @@ class ContactusController extends Controller
     public function store(contactusrequeste $request)
     {
         try {
-            contactus::create(
-                [
-                    'name' => $request->name,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                ]
-            );
+            ContactUs::create([
+                'name'    => $request->name,
+                'title'   => $request->title,
+                'message' => $request->message
+            ]);
 
-            return response()->json(['message' => 'thank you your message has been reseve'],200);
+            return response()->json(['message' => 'Thank you, your message has been received.'], 200);
         } catch (Exception $e) {
-            return response()->json(['message' => 'something went rong : ' . $e->getMessage()]);
+            return response()->json(['message' => 'Something went wrong: ' . $e->getMessage()], 500);
         }
     }
 
