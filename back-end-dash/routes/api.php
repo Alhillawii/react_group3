@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MessageController;
@@ -26,3 +27,10 @@ Route::delete('studentDelete/{id}',[StudentController::class,'destroy']);
 Route::get('messages',[MessageController::class,'index']);
 Route::get('messages/{id}',[MessageController::class,'show']);
 Route::delete('messageDelete/{id}',[MessageController::class,'destroy']);
+
+//----------------------Feedback------------------------------
+Route::get('/feedbacks', [FeedbackController::class, 'index']);         // Get all feedbacks
+Route::get('/feedbacksview/{id}', [FeedbackController::class, 'show']);     // Get feedback by ID
+Route::post('/feedbacksstore', [FeedbackController::class, 'store']);        // Create new feedback
+Route::put('/feedbacksupdate/{id}', [FeedbackController::class, 'update']);   // Update feedback by ID
+Route::delete('/feedbacksdelete/{id}', [FeedbackController::class, 'destroy']); 

@@ -5,6 +5,7 @@ import MainDash from './pages/dashboard/MainDash.jsx';
 import Students from "./pages/dashboard/Students.jsx";
 import Teachers from "./pages/dashboard/Teachers.jsx";
 import Messages from "./pages/dashboard/Messages.jsx";
+import Feedback from "./pages/dashboard/Feedback.jsx";
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
@@ -23,6 +24,7 @@ function App() {
                             <Route path="/students" element={<Students />} />
                             <Route path="/teachers" element={<Teachers />} />
                             <Route path="/messages" element={<Messages />} />
+                            <Route path="/feedback" element={<Feedback />} />
                         </Routes>
                     </div>
                 </div>
