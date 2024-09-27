@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\School_class;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
@@ -17,8 +18,11 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'date_of_birth' => $this->faker->date,
+            'national_img' => $this->faker->imageUrl(),  // Generates a random image URL
+            'parent_name' => $this->faker->name(),  // Generates a random name for the parent
+            'school_class_id' => School_Class::factory(),  // Generates or associates a SchoolClass record
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

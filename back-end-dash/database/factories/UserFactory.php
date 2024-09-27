@@ -23,12 +23,23 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'Full_name' => $this->faker->name(),  // Generates a random full name
+            'username' => $this->faker->unique()->userName(),  // Generates a unique username
+            'email' => $this->faker->unique()->safeEmail(),  // Generates a unique email address
+            'email_verified_at' => now(),  // Sets the current timestamp for email verification
+            'password' => bcrypt('password'),  // Default password for testing
+            'role_id' => $this->faker->randomElement(['student', 'teacher', 'supervisor', 'manager']),  // Randomly assigns a role
+            'address' => $this->faker->address(),  // Generates a random address
+            'DOB' => $this->faker->date(),  // Generates a random date of birth
+            'gender' => $this->faker->randomElement(['male', 'female']),  // Randomly assigns gender
+            'phone' => $this->faker->phoneNumber(),  // Generates a random phone number
+            'image' => $this->faker->imageUrl(),  // Generates a random image URL
+            'student_id' => null,  // Placeholder, adjust if you want to assign related student
+            'teacher_id' => null,  // Placeholder, adjust if you want to assign related teacher
+            'supervisor_id' => null,  // Placeholder, adjust if you want to assign related supervisor
+            'manager_id' => null,  // Placeholder, adjust if you want to assign related manager
         ];
     }
 
