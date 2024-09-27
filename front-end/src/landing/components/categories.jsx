@@ -8,9 +8,9 @@ export default function categories() {
       <div className="container">
         <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
           <h6 className="section-title bg-white text-center text-primary px-3">
-            Categories
+            Events
           </h6>
-          <h1 className="mb-5">Courses Categories</h1>
+          <h1 className="mb-5">Our Events</h1>
         </div>
         <div className="row g-3">
           <div className="col-lg-7 col-md-6">
@@ -20,13 +20,13 @@ export default function categories() {
                 data-wow-delay="0.1s"
               >
                 <a className="position-relative d-block overflow-hidden" href="">
-                  <img className="img-fluid" src="https://themewagon.github.io/elearning/img/cat-1.jpg" alt="" />
+                  <img className="img-fluid" src="https://www.austswimsea.com/wp-content/uploads/2023/06/cover1.jpg" alt="" />
                   <div
                     className="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                     style={{ margin: 1 }}
                   >
-                    <h5 className="m-0">Web Design</h5>
-                    <small className="text-primary">49 Courses</small>
+                    <h5 className="m-0">swimming training </h5>
+                   
                   </div>
                 </a>
               </div>
@@ -35,13 +35,13 @@ export default function categories() {
                 data-wow-delay="0.3s"
               >
                 <a className="position-relative d-block overflow-hidden" href="">
-                  <img className="img-fluid" src="https://themewagon.github.io/elearning/img/cat-2.jpg" alt="" />
+                  <img className="img-fluid" src="https://www.ittihad.edu.jo/wp-content/uploads/2023/12/DSC05585.jpg" alt="" />
                   <div
                     className="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                     style={{ margin: 1 }}
                   >
-                    <h5 className="m-0">Graphic Design</h5>
-                    <small className="text-primary">49 Courses</small>
+                    <h5 className="m-0">Football Day</h5>
+                    
                   </div>
                 </a>
               </div>
@@ -50,13 +50,13 @@ export default function categories() {
                 data-wow-delay="0.5s"
               >
                 <a className="position-relative d-block overflow-hidden" href="">
-                  <img className="img-fluid" src="https://themewagon.github.io/elearning/img/cat-3.jpg" alt="" />
+                  <img className="img-fluid" src="https://www.shutterstock.com/image-vector/jordan-independence-day-greeting-card-260nw-2295949511.jpg" alt="" />
                   <div
                     className="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                     style={{ margin: 1 }}
                   >
-                    <h5 className="m-0">Video Editing</h5>
-                    <small className="text-primary">49 Courses</small>
+                    <h5 className="m-0">Graduation party </h5>
+                    
                   </div>
                 </a>
               </div>
@@ -73,7 +73,7 @@ export default function categories() {
             >
               <img
                 className="img-fluid position-absolute w-100 h-100"
-                src="https://themewagon.github.io/elearning/img/cat-4.jpg"
+                src="https://www.ittihad.edu.jo/wp-content/uploads/2023/12/DSC04778-scaled.jpg"
                 alt=""
                 style={{ objectFit: "cover" }}
               />
@@ -81,8 +81,8 @@ export default function categories() {
                 className="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3"
                 style={{ margin: 1 }}
               >
-                <h5 className="m-0">Online Marketing</h5>
-                <small className="text-primary">49 Courses</small>
+                <h5 className="m-0">Scout Team</h5>
+             
               </div>
             </a>
           </div>
