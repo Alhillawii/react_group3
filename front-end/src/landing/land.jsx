@@ -10,7 +10,7 @@ import ServiceLand from './components/service'
 import TestimonialLand from './components/testimonial'
 import CategoriesLand from './components/categories'
 import CoursesLand from './components/Courses'
-import TeamLand from './components/team'
+import FAQLand from './components/FAQ'
 import FooterLand from './components/footer'
 import TopLand from './components/top'
 
@@ -25,7 +25,7 @@ export default function land() {
           <CategoriesLand />
           <CoursesLand />
           <TestimonialLand />
-          <TeamLand />
+          <FAQLand />
           <FooterLand />
           <TopLand />
     </div>

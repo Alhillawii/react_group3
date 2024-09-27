@@ -15,7 +15,7 @@ export default function about() {
           <div className="position-relative h-100">
             <img
               className="img-fluid position-absolute w-100 h-100"
-              src="https://themewagon.github.io/elearning/img/about.jpg"
+              src="https://www.ittihad.edu.jo/wp-content/uploads/2023/12/Untitled-1-31-rgb.jpg"
               alt=""
               style={{ objectFit: "cover" }}
             />
@@ -27,49 +27,72 @@ export default function about() {
           </h6>
           <h1 className="mb-4">Welcome to eLEARNING</h1>
           <p className="mb-4">
-            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-            diam amet diam et eos. Clita erat ipsum et lorem et sit.
-          </p>
-          <p className="mb-4">
-            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-            diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet
-            lorem sit clita duo justo magna dolore erat amet
+          Ittihad School is a distinguished educational institution dedicated to fostering academic excellence and 
+          personal growth among its students. Committed to providing a holistic learning experience,
+           the school emphasizes a well-rounded curriculum that integrates both academic and extracurricular activities.
+            With a focus on nurturing critical thinking, creativity, and social responsibility, Ittihad School prepares students to 
+            become responsible global citizens. The school’s experienced faculty and modern facilities create a supportive environment that 
+            encourages exploration and innovation,
+           ensuring that each student achieves their fullest potential.
           </p>
           <div className="row gy-2 gx-4 mb-4">
             <div className="col-sm-6">
               <p className="mb-0">
                 <i className="fa fa-arrow-right text-primary me-2" />
-                Skilled Instructors
+                Student Enrollment
+
+
               </p>
             </div>
             <div className="col-sm-6">
               <p className="mb-0">
                 <i className="fa fa-arrow-right text-primary me-2" />
-                Online Classes
+                Attendance Tracking
+
+
               </p>
             </div>
             <div className="col-sm-6">
               <p className="mb-0">
                 <i className="fa fa-arrow-right text-primary me-2" />
-                International Certificate
+                Grade Management
+
+                </p>
+            </div>
+            <div className="col-sm-6">
+              <p className="mb-0">
+                <i className="fa fa-arrow-right text-primary me-2" />
+                Parent Communication
               </p>
             </div>
             <div className="col-sm-6">
               <p className="mb-0">
                 <i className="fa fa-arrow-right text-primary me-2" />
-                Skilled Instructors
+                Timetable Management
+
               </p>
             </div>
             <div className="col-sm-6">
               <p className="mb-0">
                 <i className="fa fa-arrow-right text-primary me-2" />
-                Online Classes
+                Fee Management
+
               </p>
             </div>
             <div className="col-sm-6">
               <p className="mb-0">
                 <i className="fa fa-arrow-right text-primary me-2" />
-                International Certificate
+                Event Management
+
+
+
+              </p>
+            </div>
+            <div className="col-sm-6">
+              <p className="mb-0">
+                <i className="fa fa-arrow-right text-primary me-2" />
+                Resource Sharing
+
               </p>
             </div>
           </div>
