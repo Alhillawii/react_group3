@@ -81,6 +81,18 @@ function SideBar() {
                             </Link>
                             <div className="collapse"></div>
                         </li>
+                        <li className="nav-item">
+                            <Link
+
+                                to="/subjects"
+                                className="collapsed"
+                                aria-expanded="false"
+                            >
+                                <i className="fas fa-home"/>
+                                <p>Subjects</p>
+                            </Link>
+                            <div className="collapse"></div>
+                        </li>
                     </ul>
                 </div>
             </div>

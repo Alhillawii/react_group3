@@ -12,10 +12,7 @@ class Subject extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $fillable = [
-        'subject_name',
-        'semster'
-    ];
+    protected $guarded = [];
 
     public function class() {
         return $this->belongsTo(School_class::class);

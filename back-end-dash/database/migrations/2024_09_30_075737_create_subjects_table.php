@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject_name')->nullable();
-            $table->integer('semster')->nullable();
+            $table->integer('semester')->nullable();
             $table->foreignId('school_class_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('teacher_id')->nullable()->constrained()->onDelete('cascade');
             $table->softDeletes();

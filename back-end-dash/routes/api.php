@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MessageController;
@@ -26,3 +27,15 @@ Route::delete('studentDelete/{id}',[StudentController::class,'destroy']);
 Route::get('messages',[MessageController::class,'index']);
 Route::get('messages/{id}',[MessageController::class,'show']);
 Route::delete('messageDelete/{id}',[MessageController::class,'destroy']);
+
+//---------------- Supjects -----------------------------------------
+
+Route::get('/subjects', [SubjectController::class, 'index']);
+
+Route::post('/subjects', [SubjectController::class, 'store']);
+
+Route::get('/subjects/{id}', [SubjectController::class, 'show']);
+
+Route::put('/subjects/{id}', [SubjectController::class, 'update']);
+
+Route::delete('/subjects/{id}', [SubjectController::class, 'destroy']);
