@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
-    // Get all feedback records
+    
     public function index()
     {
         $feedbacks = Feedback::with(['Student', 'Teacher', 'Supervisor', 'Manager'])->get();
         return response()->json($feedbacks, 200);
     }
 
-    // Get a specific feedback by ID
+    
     public function show($id)
     {
         $feedback = Feedback::with(['student', 'teacher', 'supervisor', 'manager'])->find($id);
@@ -26,7 +26,7 @@ class FeedbackController extends Controller
         return response()->json($feedback, 200);
     }
 
-    // Create a new feedback
+   
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -42,7 +42,7 @@ class FeedbackController extends Controller
         return response()->json($feedback, 201);
     }
 
-    // Update an existing feedback by ID
+    
     public function update(Request $request, $id)
     {
         $feedback = Feedback::find($id);
@@ -64,7 +64,7 @@ class FeedbackController extends Controller
         return response()->json($feedback, 200);
     }
 
-    // Delete a feedback by ID
+  
     public function destroy($id)
     {
         $feedback = Feedback::find($id);

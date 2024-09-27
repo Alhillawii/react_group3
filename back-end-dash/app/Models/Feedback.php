@@ -17,24 +17,25 @@ class Feedback extends Model
     protected $fillable = [
         'title',
         'description',
+        
     ];
 
-    // Define the relationship with Student
+    
     public function student() {
         return $this->belongsTo(Student::class);
     }
 
-    // Define the relationship with Teacher
+    
     public function teacher() {
         return $this->belongsTo(Teacher::class);
     }
 
-    // Define the relationship with Supervisor
+   
     public function supervisor() {
         return $this->belongsTo(Supervisor::class);
     }
 
-    // Define the relationship with Manager
+   
     public function manager() {
         return $this->belongsTo(Manager::class);
     }

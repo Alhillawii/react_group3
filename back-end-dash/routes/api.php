@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
@@ -29,8 +29,14 @@ Route::get('messages/{id}',[MessageController::class,'show']);
 Route::delete('messageDelete/{id}',[MessageController::class,'destroy']);
 
 //----------------------Feedback------------------------------
-Route::get('/feedbacks', [FeedbackController::class, 'index']);         // Get all feedbacks
-Route::get('/feedbacksview/{id}', [FeedbackController::class, 'show']);     // Get feedback by ID
-Route::post('/feedbacksstore', [FeedbackController::class, 'store']);        // Create new feedback
-Route::put('/feedbacksupdate/{id}', [FeedbackController::class, 'update']);   // Update feedback by ID
+Route::get('/feedbacks', [FeedbackController::class, 'index']);       
+Route::get('/feedbacksview/{id}', [FeedbackController::class, 'show']);    
+Route::post('/feedbacksstore', [FeedbackController::class, 'store']);       
+Route::put('/feedbacksupdate/{id}', [FeedbackController::class, 'update']);   
 Route::delete('/feedbacksdelete/{id}', [FeedbackController::class, 'destroy']); 
+//----------------------SchoolClass------------------------------
+Route::get('/class', [SchoolClassController::class, 'index']);        
+Route::get('/classview/{id}', [SchoolClassController::class, 'show']);     
+Route::post('/classstore', [SchoolClassController::class, 'store']);       
+Route::put('/classupdate/{id}', [SchoolClassController::class, 'update']);   
+Route::delete('/classdelete/{id}', [SchoolClassController::class, 'destroy']); 
