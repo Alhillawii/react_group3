@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('date_of_birth');
+            $table->string('national_img');
+            $table->string('parent_name');
+            $table->foreignId('school_class_id')->nullable()->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
