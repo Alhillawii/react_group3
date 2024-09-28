@@ -12,6 +12,9 @@ class Manager extends Model
     use HasFactory , SoftDeletes;
 
     
+    protected $fillable = [
+        'id'
+    ];
     public function user()
     {
         return $this->hasOne(User::class);
