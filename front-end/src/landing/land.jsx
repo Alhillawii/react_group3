@@ -1,33 +1,39 @@
-import React from 'react'
-import '../assets/css/style.css'
-import '../assets/css/bootstrap.min.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import '../assets/css/style.css';
+import '../assets/css/bootstrap.min.css';
 
 
-import NavLand from './components/nav'
-import HeroLand from './components/hero'
-import AboutLand from './components/about'
-import ServiceLand from './components/service'
-import TestimonialLand from './components/testimonial'
-import CategoriesLand from './components/categories'
-import CoursesLand from './components/Courses'
-import FAQLand from './components/FAQ'
-import FooterLand from './components/footer'
-import TopLand from './components/top'
+// Import your components
+import NavLand from './components/nav';
+import HeroLand from './components/hero';
+import AboutLand from './components/about';
+import ServiceLand from './components/service';
+import TestimonialLand from './components/testimonial';
+import CategoriesLand from './components/categories';
+import CoursesLand from './components/Courses';
+import FAQLand from './components/FAQ';
+import FooterLand from './components/footer';
+import TopLand from './components/top';
+import Home from './components/Home';  // Create or adjust the Home component
 
 
-export default function land() {
+export default function App() {
   return (
-    <div>
-          <NavLand />
-          <HeroLand />
-          <AboutLand />
-          <ServiceLand />
-          <CategoriesLand />
-          <CoursesLand />
-          <TestimonialLand />
-          <FAQLand />
-          <FooterLand />
-          <TopLand />
-    </div>
-  )
+    <Router>
+      <NavLand />
+      <Routes>
+        {/* Define routes here */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutLand />} />
+        <Route path="/services" element={<ServiceLand />} />
+        <Route path="/courses" element={<CoursesLand />} />
+        <Route path="/testimonials" element={<TestimonialLand />} />
+        <Route path="/faq" element={<FAQLand />} />
+        
+      </Routes>
+      <TopLand />
+      <FooterLand />
+    </Router>
+  );
 }
