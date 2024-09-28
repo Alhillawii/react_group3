@@ -21,19 +21,18 @@ class UserStoreRequest extends FormRequest
      */
     public function rules(): array
     {   
-       if(request()->isMethod('post')){
-        return[
-            'name'=> 'required|string',
-            'email'=> 'required|string',
-            'password'=> 'required|string'
+             return [
+            'Full_name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role_id' => 'required|integer|exists:roles,id',
+            'address' => 'nullable|string|max:255',
+            'DOB' => 'nullable|date',
+            'gender' => 'nullable|string|in:male,female,other',
+            'phone' => 'nullable|string|max:20',
+            'image' => 'nullable|string|max:255',
         ];
-       }else{
-            return[
-            'name'=> 'required|string',
-            'email'=> 'required|string',
-            'password'=> 'required|string'
-        ];
-       }
     }
 
     public function message() {

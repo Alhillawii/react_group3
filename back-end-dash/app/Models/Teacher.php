@@ -34,7 +34,7 @@ class Teacher extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(related: User::class);
     }
 
     

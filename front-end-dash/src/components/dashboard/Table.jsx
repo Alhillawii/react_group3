@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
@@ -286,3 +284,4 @@ export default function UserInfo() {
     </div>
   );
 }
+
