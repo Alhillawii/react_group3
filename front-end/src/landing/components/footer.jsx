@@ -70,20 +70,17 @@ export default function footer() {
             <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
               ©{" "}
               <a className="border-bottom" href="#">
-                Your Site Name
+              al ittihad school
               </a>
               , All Right Reserved.
               {/*/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. *** /*/}
-              Designed By{" "}
+              Designed By{""}
               <a className="border-bottom" href="https://htmlcodex.com">
-                HTML Codex
+                Group "3"
               </a>
               <br />
               <br />
-              Distributed By{" "}
-              <a className="border-bottom" href="https://themewagon.com">
-                ThemeWagon
-              </a>
+             
             </div>
             <div className="col-md-6 text-center text-md-end">
               <div className="footer-menu">

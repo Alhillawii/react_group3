@@ -1,15 +1,20 @@
 import Footer from './components/dashboard/Footer.jsx';
-import Sidebar from './components/dashboard/Sidebar.jsx';
+import Sidebar from './components/dashboard/SideBar.jsx';
 import Navbar from './components/dashboard/Navbar.jsx';
 import MainDash from './pages/dashboard/MainDash.jsx';
 import Students from "./pages/dashboard/Students.jsx";
 import Teachers from "./pages/dashboard/Teachers.jsx";
 import Messages from "./pages/dashboard/Messages.jsx";
+
 import EditTeacher from './pages/dashboard/EditTeacher.jsx';
 import TeacherDetails from './pages/dashboard/TeacherDetails.jsx';
 import Managers from './pages/dashboard/Managers.jsx';
 import AddManager from './pages/dashboard/AddManager.jsx';
 import ManagerDetails from './pages/dashboard/ManagerDetails.jsx';
+
+import Feedback from "./pages/dashboard/Feedback.jsx";
+import Classes from "./pages/dashboard/Classes.jsx";
+
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import AddTeacher from './pages/dashboard/AddTeacher.jsx';
@@ -40,6 +45,8 @@ function App() {
                             <Route path="/teachers/edit/:id" element={<EditTeacher />} /> 
 
                             <Route path="/messages" element={<Messages />} />
+                            <Route path="/feedback" element={<Feedback />} />
+                            <Route path="/classes" element={<Classes />} />
                         </Routes>
                     </div>
                 </div>

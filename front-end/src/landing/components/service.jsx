@@ -11,10 +11,9 @@ export default function service() {
             <div className="service-item text-center pt-3">
               <div className="p-4">
                 <i className="fa fa-3x fa-graduation-cap text-primary mb-4" />
-                <h5 className="mb-3">Skilled Instructors</h5>
+                <h5 className="mb-3">Event Management</h5>
                 <p>
-                  Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                  amet diam
+                Tools to plan, organize, and communicate school events, making it easier for the school community to participate.
                 </p>
               </div>
             </div>
@@ -23,10 +22,9 @@ export default function service() {
             <div className="service-item text-center pt-3">
               <div className="p-4">
                 <i className="fa fa-3x fa-globe text-primary mb-4" />
-                <h5 className="mb-3">Online Classes</h5>
+                <h5 className="mb-3">Attendance Tracking</h5>
                 <p>
-                  Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                  amet diam
+                Automated attendance management system to track student presence, ensuring accurate records and easy access.
                 </p>
               </div>
             </div>
@@ -35,10 +33,9 @@ export default function service() {
             <div className="service-item text-center pt-3">
               <div className="p-4">
                 <i className="fa fa-3x fa-home text-primary mb-4" />
-                <h5 className="mb-3">Home Projects</h5>
+                <h5 className="mb-3">Grade Management</h5>
                 <p>
-                  Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                  amet diam
+                Comprehensive grade management system that allows teachers to input, track, and report student performance efficiently.
                 </p>
               </div>
             </div>
@@ -47,10 +44,9 @@ export default function service() {
             <div className="service-item text-center pt-3">
               <div className="p-4">
                 <i className="fa fa-3x fa-book-open text-primary mb-4" />
-                <h5 className="mb-3">Book Library</h5>
+                <h5 className="mb-3">Parent Communication</h5>
                 <p>
-                  Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita
-                  amet diam
+                A dedicated platform for parents to receive updates, messages, and announcements, fostering stronger home-school connections.
                 </p>
               </div>
             </div>
