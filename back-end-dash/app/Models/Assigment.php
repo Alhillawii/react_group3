@@ -11,10 +11,7 @@ class Assigment extends Model
 {
     use HasFactory , SoftDeletes;
 
-    protected $fillable = [
-        'title',
-        'attachment',
-    ];
+    protected $guarded = [];
 
     public function teacher() {
         return $this->belongsTo(Teacher::class);

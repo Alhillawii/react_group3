@@ -4,61 +4,48 @@ import $ from 'jquery';
 import 'datatables.net-bs5';
 import Swal from 'sweetalert';
 
-
-export default function SubjectInfo() {
-  const [subjectData, setSubjectData] = useState([]);
-  const [newSubject, setNewSubject] = useState({ subject_name: '', semester: '', school_class_id: '', teacher_id: '' });
-  const [editSubject, setEditSubject] = useState({ id: '', subject_name: '', semester: '', school_class_id: '', teacher_id: '' });
+export default function AssignmentInfo() {
+  const [assignmentData, setAssignmentData] = useState([]);
+  const [newAssignment, setNewAssignment] = useState({ title: '', attachment: '', teacher_id: '' });
+  const [editAssignment, setEditAssignment] = useState({ id: '', title: '', attachment: '', teacher_id: '' });
 
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
-    if (subjectData.length > 0) {
+    if (assignmentData.length > 0) {
       $('#add-row').DataTable();
     }
-  }, [subjectData]);
+  }, [assignmentData]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/subjects');
-      setSubjectData(response.data);
+      const response = await axios.get('http://127.0.0.1:8000/api/assigments');
+      setAssignmentData(response.data);
     } catch (error) {
       console.error('Error fetching data', error);
     }
   };
 
   const handleDelete = async (id) => {
-    // Show confirmation dialog
     Swal({
-      title: "Are you sure you want to delete this Subject?",
-      text: "This Subject will be deleted!",
+      title: "Are you sure you want to delete this Assignment?",
+      text: "This assignment will be deleted!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
         try {
-          // Attempt to delete the subject
-          await axios.delete(`http://127.0.0.1:8000/api/subjects/${id}`);
-          
-
-          setSubjectData((prevSubjects) => prevSubjects.filter((subject) => subject.id !== id));
-
-          Swal("Subject deleted!", {
-            icon: "success",
-          });
+          await axios.delete(`http://127.0.0.1:8000/api/assigments/${id}`);
+          setAssignmentData((prevAssignments) => prevAssignments.filter((assignment) => assignment.id !== id));
+          Swal("Assignment deleted!", { icon: "success" });
         } catch (error) {
-          console.error('Error deleting subject', error);
-          
-
-          Swal("An error occurred while deleting!", {
-            icon: "error",
-          });
+          console.error('Error deleting assignment', error);
+          Swal("An error occurred while deleting!", { icon: "error" });
         }
       } else {
-
         Swal("Deletion canceled!");
       }
     });
@@ -67,36 +54,36 @@ export default function SubjectInfo() {
   const handleChange = (e, formType) => {
     const { name, value } = e.target;
     if (formType === 'add') {
-      setNewSubject((prev) => ({ ...prev, [name]: value }));
+      setNewAssignment((prev) => ({ ...prev, [name]: value }));
     } else if (formType === 'edit') {
-      setEditSubject((prev) => ({ ...prev, [name]: value }));
+      setEditAssignment((prev) => ({ ...prev, [name]: value }));
     }
   };
 
-  const handleAddSubject = async (e) => {
+  const handleAddAssignment = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/subjects', newSubject);
-      setSubjectData((prev) => [...prev, response.data]);
-      setNewSubject({ subject_name: '', semester: '', school_class_id: '', teacher_id: '' });
-      $('#addRowModal').modal('hide'); 
+      const response = await axios.post('http://127.0.0.1:8000/api/assigments', newAssignment);
+      setAssignmentData((prev) => [...prev, response.data]);
+      setNewAssignment({ title: '', attachment: '', teacher_id: '' });
+      $('#addRowModal').modal('hide');
     } catch (err) {
-      console.error('Error adding subject', err);
+      console.error('Error adding assignment', err);
     }
   };
 
-  const handleEditClick = (subject) => {
-    setEditSubject({ id: subject.id, subject_name: subject.subject_name, semester: subject.semester, school_class_id: subject.school_class_id, teacher_id: subject.teacher_id });
+  const handleEditClick = (assignment) => {
+    setEditAssignment({ id: assignment.id, title: assignment.title, attachment: assignment.attachment, teacher_id: assignment.teacher_id });
   };
 
-  const handleEditSubject = async (e) => {
+  const handleEditAssignment = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://127.0.0.1:8000/api/subjects/${editSubject.id}`, editSubject);
-      setSubjectData((prev) => prev.map((subject) => (subject.id === editSubject.id ? { ...subject, ...editSubject } : subject)));
-      $('#editRowModal').modal('hide'); // Hide the modal after editing
+      await axios.put(`http://127.0.0.1:8000/api/assigments/${editAssignment.id}`, editAssignment);
+      setAssignmentData((prev) => prev.map((assignment) => (assignment.id === editAssignment.id ? { ...assignment, ...editAssignment } : assignment)));
+      $('#editRowModal').modal('hide');
     } catch (err) {
-      console.error('Error editing subject', err);
+      console.error('Error editing assignment', err);
     }
   };
 
@@ -104,75 +91,61 @@ export default function SubjectInfo() {
     <div className="container">
       <div className="page-inner">
         <div className="page-header">
-          <h3 className="fw-bold mb-3">Subject Info</h3>
+          <h3 className="fw-bold mb-3">Assignment Info</h3>
         </div>
         <div className="row">
           <div className="col-md-12">
             <div className="card">
               <div className="card-header">
                 <div className="d-flex align-items-center">
-                  <h4 className="card-title">Add Subject</h4>
+                  <h4 className="card-title">Add Assignment</h4>
                   <button
                     className="btn btn-primary btn-round ms-auto"
                     data-bs-toggle="modal"
                     data-bs-target="#addRowModal"
                   >
-                    <i className="fa fa-plus" /> Add Subject
+                    <i className="fa fa-plus" /> Add Assignment
                   </button>
                 </div>
               </div>
               <div className="card-body">
-                {/* Add Subject Modal */}
                 <div className="modal fade" id="addRowModal" tabIndex={-1} role="dialog" aria-hidden="true">
                   <div className="modal-dialog" role="document">
                     <div className="modal-content">
                       <div className="modal-header border-0">
                         <h5 className="modal-title">
                           <span className="fw-mediumbold">New</span>
-                          <span className="fw-light"> Subject </span>
+                          <span className="fw-light"> Assignment </span>
                         </h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                       </div>
                       <div className="modal-body">
-                        <form onSubmit={handleAddSubject}>
+                        <form onSubmit={handleAddAssignment}>
                           <div className="row">
                             <div className="col-sm-12">
                               <div className="form-group form-group-default">
-                                <label>Subject Name</label>
+                                <label>Title</label>
                                 <input
-                                  name="subject_name"
-                                  value={newSubject.subject_name}
+                                  name="title"
+                                  value={newAssignment.title}
                                   onChange={(e) => handleChange(e, 'add')}
                                   type="text"
                                   className="form-control"
-                                  placeholder="Fill subject name"
+                                  placeholder="Fill title"
                                   required
                                 />
                               </div>
                             </div>
-                            <div className="col-md-6 pe-0">
+                            <div className="col-sm-12">
                               <div className="form-group form-group-default">
-                                <label>Semester</label>
+                                <label>Attachment</label>
                                 <input
-                                  name="semester"
-                                  value={newSubject.semester}
+                                  name="attachment"
+                                  value={newAssignment.attachment}
                                   onChange={(e) => handleChange(e, 'add')}
                                   type="text"
                                   className="form-control"
-                                  placeholder="Fill semester"
-                                />
-                              </div>
-                            </div>
-                            <div className="col-md-6">
-                              <div className="form-group form-group-default">
-                                <label>Class ID</label>
-                                <input
-                                  name="school_class_id"
-                                  value={newSubject.school_class_id}
-                                  onChange={(e) => handleChange(e, 'add')}
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="Fill class ID"
+                                  placeholder="Fill attachment"
                                   required
                                 />
                               </div>
@@ -182,7 +155,7 @@ export default function SubjectInfo() {
                                 <label>Teacher ID</label>
                                 <input
                                   name="teacher_id"
-                                  value={newSubject.teacher_id}
+                                  value={newAssignment.teacher_id}
                                   onChange={(e) => handleChange(e, 'add')}
                                   type="text"
                                   className="form-control"
@@ -204,24 +177,23 @@ export default function SubjectInfo() {
 
                 <div className="table-responsive">
                 <table id="add-row" className="display table table-striped table-hover">
-                  <thead>
+                <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Subject Name</th>
-                      <th>Semester</th>
-                      <th>Class ID</th>
+                      <th>Title</th>
+                      <th>Attachment</th>
                       <th>Teacher ID</th>
                       <th style={{ width: '10%' }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {subjectData.map((subject) => (
-                      <tr key={subject.id}>
-                        <td>{subject.id}</td>
-                        <td>{subject.subject_name}</td>
-                        <td>{subject.semester}</td>
-                        <td>{subject.school_class_id}</td>
-                        <td>{subject.teacher_id}</td>
+                    {assignmentData.map((assignment) => (
+                      <tr key={assignment.id}>
+                        <td>{assignment.id}</td>
+                        <td>{assignment.title}</td>
+                        <td>{assignment.attachment}</td>
+                        <td>{assignment.teacher_id}</td>
+                        
                         <td>
                           <div className="form-button-action">
                             <button
@@ -229,19 +201,20 @@ export default function SubjectInfo() {
                               className="btn btn-link btn-primary btn-lg"
                               data-bs-toggle="modal"
                               data-bs-target="#editRowModal"
-                              onClick={() => handleEditClick(subject)}
+                              onClick={() => handleEditClick(assignment)}
                             >
                               <i className="fa fa-edit" />
                             </button>
                             <button
                               type="button"
                               className="btn btn-link btn-danger"
-                              onClick={() => handleDelete(subject.id)}
+                              onClick={() => handleDelete(assignment.id)}
                             >
                               <i className="fa fa-times" />
                             </button>
-                          </div>
+                        </div>
                         </td>
+
                       </tr>
                     ))}
                   </tbody>
@@ -252,57 +225,43 @@ export default function SubjectInfo() {
           </div>
         </div>
 
-        {/* Edit Subject Modal */}
         <div className="modal fade" id="editRowModal" tabIndex={-1} role="dialog" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header border-0">
                 <h5 className="modal-title">
                   <span className="fw-mediumbold">Edit</span>
-                  <span className="fw-light"> Subject </span>
+                  <span className="fw-light"> Assignment </span>
                 </h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
               </div>
               <div className="modal-body">
-                <form onSubmit={handleEditSubject}>
+                <form onSubmit={handleEditAssignment}>
                   <div className="row">
                     <div className="col-sm-12">
                       <div className="form-group form-group-default">
-                        <label>Subject Name</label>
+                        <label>Title</label>
                         <input
-                          name="subject_name"
-                          value={editSubject.subject_name}
+                          name="title"
+                          value={editAssignment.title}
                           onChange={(e) => handleChange(e, 'edit')}
                           type="text"
                           className="form-control"
-                          placeholder="Fill subject name"
+                          placeholder="Fill title"
                           required
                         />
                       </div>
                     </div>
-                    <div className="col-md-6 pe-0">
+                    <div className="col-sm-12">
                       <div className="form-group form-group-default">
-                        <label>Semester</label>
+                        <label>Attachment</label>
                         <input
-                          name="semester"
-                          value={editSubject.semester}
+                          name="attachment"
+                          value={editAssignment.attachment}
                           onChange={(e) => handleChange(e, 'edit')}
                           type="text"
                           className="form-control"
-                          placeholder="Fill semester"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group form-group-default">
-                        <label>Class ID</label>
-                        <input
-                          name="school_class_id"
-                          value={editSubject.school_class_id}
-                          onChange={(e) => handleChange(e, 'edit')}
-                          type="text"
-                          className="form-control"
-                          placeholder="Fill class ID"
+                          placeholder="Fill attachment"
                           required
                         />
                       </div>
@@ -312,7 +271,7 @@ export default function SubjectInfo() {
                         <label>Teacher ID</label>
                         <input
                           name="teacher_id"
-                          value={editSubject.teacher_id}
+                          value={editAssignment.teacher_id}
                           onChange={(e) => handleChange(e, 'edit')}
                           type="text"
                           className="form-control"
@@ -323,7 +282,7 @@ export default function SubjectInfo() {
                     </div>
                   </div>
                   <div className="modal-footer border-0">
-                    <button type="submit" className="btn btn-primary">Update</button>
+                    <button type="submit" className="btn btn-primary">Save changes</button>
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   </div>
                 </form>
