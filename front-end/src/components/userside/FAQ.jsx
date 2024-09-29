@@ -10,7 +10,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
                 style={{ cursor: 'pointer' }}
             >
                 {question}
-                {isOpen ? <FaChevronUp /> : <FaChevronDown />} {/* Toggle icon based on isOpen */}
+                {/*{isOpen ? <FaChevronUp /> : <FaChevronDown />} /!* Toggle icon based on isOpen *!/*/}
             </h5>
             {isOpen && <p className="answer">{answer}</p>}
         </div>

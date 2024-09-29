@@ -138,7 +138,3 @@ export default function Supervisors() {
     );
 }
 
-Table.defaultProps = {
-    show: true,
-    edit: true
-};
