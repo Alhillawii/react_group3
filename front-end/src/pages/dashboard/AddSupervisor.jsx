@@ -1,9 +1,9 @@
 import  { useState } from 'react';
-import { useParams,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function AddSupervisor() {
-    const {roleId} = useParams();
+
     const navigate = useNavigate();
     const [newUser, setNewUser] = useState({
         username: '',
@@ -15,19 +15,7 @@ function AddSupervisor() {
         phone: '',
         gender: ''
     });
-    const baseApiUrl = "http://127.0.0.1:8000/api/";
-    const getUserRoleTitle = (role) => {
-        switch(parseInt(role)) {
-            case 3:
-                return 'manager';
-            case 2:
-                return 'supervisor';
-            case 1:
-                return 'teacher';
-            default:
-                return 'student';
-        }
-    };
+
 
     const [image, setImage] = useState(null);
 
@@ -54,7 +42,7 @@ function AddSupervisor() {
                 formData.append('image', image);
             }
 
-          const response =  await axios.post(`${baseApiUrl}add_${getUserRoleTitle()}`, formData, {
+          const response =  await axios.post("http://127.0.0.1:8000/api/add_supervisor", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -80,7 +68,7 @@ function AddSupervisor() {
     return (
 
         <div className="container mt-5">
-            <h1>Add New {getUserRoleTitle(roleId)}</h1>
+            <h1>Add New Supervisor</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Full Name</label>
@@ -146,55 +134,16 @@ function AddSupervisor() {
                         onChange={handleChange}
                     />
                 </div>
-                {
-                    roleId === '0' ?
-                        <>
-                            <div className="form-group">
-                                <label>Parent Phone</label>
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    className="form-control"
-                                    value={newUser.phone}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Parent Name</label>
-                                <input
-                                    type="text"
-                                    name="parent_name"
-                                    className="form-control"
-                                    value={newUser.parent_name}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>ID Image</label>
-                                <input
-                                    type="file"
-                                    name="image"
-                                    className="form-control"
-                                    onChange={handleImageChange}
-                                    accept="image/*"
-                                />
-                            </div>
-                        </>
-                        :
-                        <>
-                            <div className="form-group">
-                                <label>Phone</label>
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    className="form-control"
-                                    value={newUser.phone}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
-                        </>
-                }
+                <div className="form-group">
+                    <label>Phone</label>
+                    <input
+                        type="text"
+                        name="phone"
+                        className="form-control"
+                        value={newUser.phone}
+                        onChange={handleChange}
+                    />
+                </div>
                 <div className="form-group">
                     <label>Profile Image</label>
                     <input
@@ -219,7 +168,7 @@ function AddSupervisor() {
                         <option value="female">Female</option>
                     </select>
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">Add {getUserRoleTitle(roleId)}</button>
+                <button type="submit" className="btn btn-primary mt-3">Add Supervisor</button>
                 <button type="button" className="btn btn-secondary mt-3 ms-2" onClick={() => navigate(-1)}>Cancel
                 </button>
             </form>
