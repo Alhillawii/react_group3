@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Nav() {
+  const [showServices, setShowServices] = useState(false); // State to manage services visibility
+
+  const handleServicesClick = () => {
+    setShowServices(!showServices); // Toggle the visibility of services
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
@@ -31,9 +37,23 @@ export default function Nav() {
             <Link to="/courses" className="nav-item nav-link">
               Courses
             </Link>
-            <Link to="/services" className="nav-item nav-link">
-              Services
-            </Link>
+            <div className="nav-item dropdown">
+              <span 
+                className="nav-link dropdown-toggle" 
+                onClick={handleServicesClick} // Handle click to toggle visibility
+                role="button"
+              >
+                Services
+              </span>
+              {showServices && ( // Conditionally render the services link
+                <div className="dropdown-menu">
+                  <Link to="/services" className="dropdown-item">View Accreditation</Link>
+                  <Link to="/amenities" className="dropdown-item">View Amenities </Link>
+                  
+                </div>
+                
+              )}
+            </div>
             <Link to="/contact" className="nav-item nav-link">
               Contact
             </Link>
