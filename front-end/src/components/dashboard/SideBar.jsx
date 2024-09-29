@@ -12,10 +12,10 @@ function SideBar() {
                 <div className="logo-header" data-background-color="dark">
                     <Link to="/admin/dashboard" className="logo">
                         <img
-                            src="public/img/kaiadmin/logo_light.svg"
+                            src="https://www.ittihad.edu.jo/wp-content/uploads/2022/09/ittihad-logo.png"
                             alt="navbar brand"
                             className="navbar-brand"
-                            height={20}
+                            height={60}
                         />
                     </Link>
                     <div className="nav-toggle">

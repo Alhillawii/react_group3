@@ -10,7 +10,7 @@ export default function Testimonial() {
             <div className="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
                 <div className="container">
                     <div className="text-center">
-                        <h6 className="section-title bg-white text-center text-primary px-3">
+                        <h6 className="section-title bg-white text-center px-3" style={{color:'#06BBCC'}}>
                             Testimonial
                         </h6>
                         <h1 className="mb-5">Our Students Say!</h1>

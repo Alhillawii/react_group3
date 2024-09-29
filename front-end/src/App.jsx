@@ -8,6 +8,9 @@ import Navbar from './components/dashboard/Navbar.jsx';
 import Footer from './components/dashboard/Footer.jsx';
 import Login from './components/Login';
 import { AuthProvider } from './context/AuthContext';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
 
 function AdminLayout({ children }) {
     return (

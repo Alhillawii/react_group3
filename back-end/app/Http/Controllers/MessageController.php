@@ -37,4 +37,29 @@ class MessageController extends Controller
             'message'=>'deleted successfully'
         ],200);
     }
+    public function store(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'content' => 'required|string',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        // Create a new message
+        $message = Message::create([
+            'title' => $validatedData['title'],
+            'subject' => $validatedData['subject'],
+            'content' => $validatedData['content'],
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+        ]);
+
+        return response()->json([
+            'message' => 'Message created successfully',
+            'data' => $message
+        ], 201);
+    }
 }

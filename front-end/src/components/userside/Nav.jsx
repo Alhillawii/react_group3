@@ -1,8 +1,14 @@
-// NavLand
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function NavLand() {
+    const [showServices, setShowServices] = useState(true);
+
+    // Handle the click to toggle the dropdown
+    const handleServicesClick = () => {
+        setShowServices(prevState => !prevState);
+    };
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
@@ -21,9 +27,9 @@ export default function NavLand() {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <div className="collapse navbar-collapse" id="navbarCollapse">
-                    <div className="navbar-nav ms-auto p-4 p-lg-0">
-                        <Link to="/" className="nav-item nav-link">
+                <div className="collapse navbar-collapse" id="navbarCollapse" >
+                    <div className="navbar-nav ms-auto p-4 p-lg-0" >
+                        <Link to="/" className="nav-item nav-link" >
                             Home
                         </Link>
                         <Link to="/about" className="nav-item nav-link">
@@ -32,16 +38,36 @@ export default function NavLand() {
                         <Link to="/courses" className="nav-item nav-link">
                             Courses
                         </Link>
-                        <Link to="/services" className="nav-item nav-link">
-                            Services
-                        </Link>
+                         {/* Services Dropdown */}
+                        <div className={ `d-flex align-items-center nav-item dropdown ${showServices ? "show" : ""}`}>
+                            <Link
+                                className=" nav-item nav-link  dropdown-toggle"
+                                onClick={handleServicesClick} // Toggle dropdown on click
+                                role="button"
+                                aria-expanded={showServices ? "true" : "false"}
+                                aria-haspopup="true"
+                                style={{  color:'gray' , fontSize:'1.1rem' }}
+                                
+                            >
+                                Services
+                            </Link>
+                            <div className={`dropdown-menu ${showServices ? "show" : ""}`}>
+                                <Link to="/services" className="dropdown-item">
+                                    View Accreditation
+                                </Link>
+                                <Link to="/amenities" className="dropdown-item">
+                                    View Amenities
+                                </Link>
+                            </div>
+                        </div>
                         <Link to="/contact" className="nav-item nav-link">
                             Contact
                         </Link>
                     </div>
-                    <Link to="/login" className="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-                        Login <i className="fa fa-arrow-right ms-3" />
-                    </Link>
+                    <Link to="/login" className="btn py-4 px-lg-5 d-none d-lg-block pt-4" style={{ backgroundColor: '#06BBCC' , color: 'white' ,  fontSize:'1.1rem' }}>
+    Login <i className="fa fa-arrow-right ms-3" />
+</Link>
+
                 </div>
             </nav>
         </div>

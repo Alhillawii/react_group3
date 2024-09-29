@@ -36,6 +36,8 @@ Route::delete('studentDelete/{id}',[StudentController::class,'destroy']);
 Route::get('messages',[MessageController::class,'index']);
 Route::get('message/{id}',[MessageController::class,'show']);
 Route::delete('messageDelete/{id}',[MessageController::class,'destroy']);
+Route::post('messages', [MessageController::class, 'store']);
+
 
 //------------- Supervisor -------------------------------------------
 Route::get('supervisor',[SupervisorController::class,'index']);
