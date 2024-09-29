@@ -77,16 +77,17 @@ export default function Teachers() {
                                         {teacherData.map((teacher) => (
 
                                             <tr key={teacher.id}>
-                                                <td>{teacher.user.username}</td>
-                                                <td>{teacher.user.email}</td>
-                                                <td>{teacher.degree}</td>
+                                                <td>{teacher.username}</td>
+                                                <td>{teacher.email}</td>
+                                                <td>{teacher.teacher ? teacher.teacher.degree : 'N/A'}</td>
                                                 <td>
                                                     <NavLink to={`/teachers/edit/${teacher.id}`}> <button                                 className="btn btn-link btn-primary btn-lg"
                                                     ><i className="fa fa-edit" /></button>
                                                     </NavLink>
                                                     <NavLink to={`/teachers/${teacher.id}`}>
                                                         <i className="fa fa-eye" aria-hidden="true"></i>
-                                                    </NavLink>                    <button
+                                                    </NavLink>
+                                                    <button
                                                     className="btn btn-link btn-danger"
                                                     onClick={() => handleDelete(teacher.id)}
                                                 >

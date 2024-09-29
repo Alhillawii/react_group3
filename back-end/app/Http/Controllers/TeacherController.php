@@ -10,12 +10,25 @@ use Exception;
 
 class TeacherController extends Controller
 {
+    // zaina
+//    public function index()
+//    {
+//        $teachers = Teacher::with('user')
+//            ->whereHas('user', function ($query) {
+//                $query->where('role_id', 1);
+//            })
+//            ->get();
+//
+//        return response()->json([
+//            'results' => $teachers
+//        ], 200);
+//    }
+
+// abood
     public function index()
     {
-        $teachers = Teacher::with('user')
-            ->whereHas('user', function ($query) {
-                $query->where('role_id', 1);
-            })
+        $teachers = User::with('teacher')
+            ->where('role_id', 1)
             ->get();
 
         return response()->json([
