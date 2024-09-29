@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Make sure to install axios: npm install axios
 
-function UserDetailPage() {
+function SupervisorDetails() {
     const { roleId,id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -94,4 +94,4 @@ function UserDetailPage() {
     );
 }
 
-export default UserDetailPage;
+export default SupervisorDetails;

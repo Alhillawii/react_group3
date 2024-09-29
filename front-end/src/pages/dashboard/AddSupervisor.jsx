@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function UserAddPage() {
+function AddSupervisor() {
     const {roleId} = useParams();
     const navigate = useNavigate();
     const [newUser, setNewUser] = useState({
@@ -227,4 +227,4 @@ function UserAddPage() {
     );
 }
 
-export default UserAddPage;
+export default AddSupervisor;

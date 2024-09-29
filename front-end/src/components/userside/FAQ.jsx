@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import{ useState } from 'react';
+// import { FaChevronDown, FaChevronUp } from 'react-icons/fa'; // Importing chevron icons
 
 const FAQItem = ({ question, answer, isOpen, toggle }) => {
     return (
@@ -9,7 +10,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
                 style={{ cursor: 'pointer' }}
             >
                 {question}
-                <span>{isOpen ? '▲' : '▼'}</span> {/* Unicode triangles as toggle indicators */}
+                {isOpen ? <FaChevronUp /> : <FaChevronDown />} {/* Toggle icon based on isOpen */}
             </h5>
             {isOpen && <p className="answer">{answer}</p>}
         </div>
@@ -17,7 +18,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
 };
 
 export default function FAQ() {
-    const [openIndex, setOpenIndex] = useState(null);
+    const [openIndex, setOpenIndex] = useState(null); // Track which question is open
 
     const faqs = [
         {
@@ -29,7 +30,7 @@ export default function FAQ() {
             answer: "Enrollment can be completed online through our dedicated enrollment page. Simply fill out the required information and submit the form."
         },
         {
-            question: "How do I access my child's academic performance?",
+            question: "How do I access my child’s academic performance?",
             answer: "Parents can log in to the parent portal using their credentials to view grades, attendance records, and progress reports."
         },
         {
@@ -43,7 +44,7 @@ export default function FAQ() {
     ];
 
     const toggleFAQ = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
+        setOpenIndex(openIndex === index ? null : index); // Toggle open index
     };
 
     return (

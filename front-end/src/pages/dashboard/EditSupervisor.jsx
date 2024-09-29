@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function UserUpdatePage({ getUserUrl, updateUserUrl }) {
+function EditSupervisor({ getUserUrl, updateUserUrl }) {
     const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -169,9 +169,9 @@ function UserUpdatePage({ getUserUrl, updateUserUrl }) {
 
 // Default props
 
-export default UserUpdatePage;
+export default EditSupervisor;
 
-UserUpdatePage.defaultProps = {
+EditSupervisor.defaultProps = {
     getUserUrl: 'http://127.0.0.1:8000/api/supervisors',
     updateUserUrl: 'http://127.0.0.1:8000/api/supervisorUpdate'
 };

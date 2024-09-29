@@ -27,18 +27,7 @@ export default function Table(props) {
         }
     };
 
-    const getUserRoleNum= () => {
-        switch(userData.role_id) {
-            case "3":
-                return 3;
-            case "2":
-                return 2;
-            case "1":
-                return 1;
-            default:
-                return 0;
-        }
-    };
+
 
     const handleDelete = async (id) => {
         try {
@@ -49,7 +38,7 @@ export default function Table(props) {
         }
     };
 
-    const handleAddClick = (roleId) => {
+    const handleAddClick = () => {
         navigate(`/user-add/${roleId}`);
     };
 
