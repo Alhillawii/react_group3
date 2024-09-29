@@ -4,6 +4,7 @@ import $ from 'jquery';
 import 'datatables.net-bs5';
 import Swal from 'sweetalert';
 
+
 export default function AssignmentInfo() {
   const [assignmentData, setAssignmentData] = useState([]);
   const [newAssignment, setNewAssignment] = useState({ title: '', attachment: '', teacher_id: '' });
@@ -52,18 +53,40 @@ export default function AssignmentInfo() {
   };
 
   const handleChange = (e, formType) => {
-    const { name, value } = e.target;
-    if (formType === 'add') {
-      setNewAssignment((prev) => ({ ...prev, [name]: value }));
-    } else if (formType === 'edit') {
-      setEditAssignment((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    if (name === 'attachment' && files.length > 0) {
+      const file = files[0];
+
+      if (file.type !== 'application/pdf') {
+        Swal("Please upload a valid PDF file!", { icon: "error" });
+        return;
+      }
+      if (formType === 'add') {
+        setNewAssignment((prev) => ({ ...prev, [name]: file }));
+      } else if (formType === 'edit') {
+        setEditAssignment((prev) => ({ ...prev, [name]: file }));
+      }
+    } else {
+      if (formType === 'add') {
+        setNewAssignment((prev) => ({ ...prev, [name]: value }));
+      } else if (formType === 'edit') {
+        setEditAssignment((prev) => ({ ...prev, [name]: value }));
+      }
     }
   };
 
   const handleAddAssignment = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', newAssignment.title);
+    formData.append('attachment', newAssignment.attachment);
+    formData.append('teacher_id', newAssignment.teacher_id);
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/assigments', newAssignment);
+      const response = await axios.post('http://127.0.0.1:8000/api/assigments', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       setAssignmentData((prev) => [...prev, response.data]);
       setNewAssignment({ title: '', attachment: '', teacher_id: '' });
       $('#addRowModal').modal('hide');
@@ -78,12 +101,21 @@ export default function AssignmentInfo() {
 
   const handleEditAssignment = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', editAssignment.title);
+    formData.append('attachment', editAssignment.attachment);
+    formData.append('teacher_id', editAssignment.teacher_id);
     try {
-      await axios.put(`http://127.0.0.1:8000/api/assigments/${editAssignment.id}`, editAssignment);
+      await axios.put(`http://127.0.0.1:8000/api/assigments/${editAssignment.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       setAssignmentData((prev) => prev.map((assignment) => (assignment.id === editAssignment.id ? { ...assignment, ...editAssignment } : assignment)));
       $('#editRowModal').modal('hide');
     } catch (err) {
       console.error('Error editing assignment', err);
+      Swal("Error updating assignment: " + err.message, { icon: "error" });
     }
   };
 
@@ -141,11 +173,9 @@ export default function AssignmentInfo() {
                                 <label>Attachment</label>
                                 <input
                                   name="attachment"
-                                  value={newAssignment.attachment}
                                   onChange={(e) => handleChange(e, 'add')}
-                                  type="text"
+                                  type="file"
                                   className="form-control"
-                                  placeholder="Fill attachment"
                                   required
                                 />
                               </div>
@@ -191,9 +221,15 @@ export default function AssignmentInfo() {
                       <tr key={assignment.id}>
                         <td>{assignment.id}</td>
                         <td>{assignment.title}</td>
-                        <td>{assignment.attachment}</td>
+                        <td>
+                          {assignment.attachment && (
+                            <a href={`http://127.0.0.1:8000/storage/${assignment.attachment}`} target="_blank" rel="noopener noreferrer">
+                              View Attachment
+                            </a>
+                          )}
+                        </td>
                         <td>{assignment.teacher_id}</td>
-                        
+
                         <td>
                           <div className="form-button-action">
                             <button
@@ -257,12 +293,9 @@ export default function AssignmentInfo() {
                         <label>Attachment</label>
                         <input
                           name="attachment"
-                          value={editAssignment.attachment}
                           onChange={(e) => handleChange(e, 'edit')}
-                          type="text"
+                          type="file"
                           className="form-control"
-                          placeholder="Fill attachment"
-                          required
                         />
                       </div>
                     </div>
