@@ -10,14 +10,23 @@ use Exception;
 
 class ManagerController extends Controller
 {
-    public function index()
-    {
-        $managers = Manager::with('user')
-            ->whereHas('user', function ($query) {
-                $query->where('role_id', 3);
-            })
-            ->get();
+    //zaina
+//    public function index()
+//    {
+//        $managers = Manager::with('user')
+//            ->whereHas('user', function ($query) {
+//                $query->where('role_id', 3);
+//            })
+//            ->get();
+//
+//        return response()->json([
+//            'results' => $managers
+//        ], 200);
+//    }
 
+// abood
+    public function index()  {
+        $managers = User::where('role_id', 3)->get();
         return response()->json([
             'results' => $managers
         ], 200);

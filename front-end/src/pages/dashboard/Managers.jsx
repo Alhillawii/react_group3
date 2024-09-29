@@ -67,9 +67,9 @@ export default function Managers() {
                                         <tbody>
                                         {managerData.map((manager) => (
                                             <tr key={manager.id}>
-                                                <td>{manager.user.Full_name}</td>
-                                                <td>{manager.user.username}</td>
-                                                <td>{manager.user.email}</td>
+                                                <td>{manager.Full_name}</td>
+                                                <td>{manager.username}</td>
+                                                <td>{manager.email}</td>
                                                 <td>
                                                     <NavLink to={`/managers/edit/${manager.id}`}>
                                                         <button className="btn btn-link btn-primary btn-lg">
