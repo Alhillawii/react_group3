@@ -101,7 +101,7 @@ function SideBar() {
                         <li className="nav-item">
                             <Link
 
-                                to="/admin/supervisor"
+                                to="/admin/supervisors"
                                 className="collapsed"
                                 aria-expanded="false"
                             >

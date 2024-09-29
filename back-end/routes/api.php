@@ -38,7 +38,7 @@ Route::get('message/{id}',[MessageController::class,'show']);
 Route::delete('messageDelete/{id}',[MessageController::class,'destroy']);
 
 //------------- Supervisor -------------------------------------------
-Route::get('supervisor',[SupervisorController::class,'index']);
+Route::get('supervisors',[SupervisorController::class,'index']);
 Route::get('supervisor/{id}',[SupervisorController::class,'show']);
 Route::post('add_supervisor',[SupervisorController::class,'store']);
 Route::put('supervisorUpdate/{id}',[SupervisorController::class,'update']);

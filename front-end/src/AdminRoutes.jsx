@@ -37,9 +37,9 @@ const AdminRoutes = () => (
 
         {/*  supervisor routes  */}
         <Route path="supervisors" element={<Supervisors />} />
-        <Route path="user/:roleId/:id" element={<SupervisorDetails />} />
-        <Route path="user-update/:id" element={<EditSupervisor />} />
-        <Route path="user-add/:roleId" element={<AddSupervisor />} />
+        <Route path="supervisor/add" element={<AddSupervisor />} />
+        <Route path="supervisor/:id" element={<SupervisorDetails />} />
+        <Route path="supervisor/edit/:id" element={<EditSupervisor />} />
         {/*  manager routes  */}
         <Route path="managers" element={<Managers />} />
         <Route path="managers/add" element={<AddManager />} />

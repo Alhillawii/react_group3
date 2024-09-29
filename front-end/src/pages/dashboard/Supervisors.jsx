@@ -39,34 +39,34 @@ export default function Supervisors() {
     };
 
     const handleAddClick = () => {
-        navigate(`/user-add/${roleId}`);
+        navigate('supervisor/add');
     };
 
     const handleEditClick = (userId) => {
-        navigate(`/user-update/${userId}`);
+        navigate(`supervisor/edit/${userId}`);
     };
 
-    const handleShowMoreInfo = (userId,roleId) => {
-        navigate(`/user/${roleId}/${userId}`);
+    const handleShowMoreInfo = (userId) => {
+        navigate(`supervisor/${userId}`);
     };
 
     return (
         <div className="container">
             <div className="page-inner">
                 <div className="page-header">
-                    <h3 className="fw-bold mb-3">{props.name} Info</h3>
+                    <h3 className="fw-bold mb-3">Supervisors Info</h3>
                 </div>
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
                             <div className="card-header">
                                 <div className="d-flex align-items-center">
-                                    <h4 className="card-title">Add {props.name}</h4>
+                                    <h4 className="card-title">Add Supervisor</h4>
                                     <button
                                         className="btn btn-primary btn-round ms-auto"
-                                        onClick={()=> handleAddClick(getUserRoleNum())}
+                                        onClick={()=> handleAddClick()}
                                     >
-                                        <i className="fa fa-plus" /> Add {props.name}
+                                        <i className="fa fa-plus" /> Add Supervisor
                                     </button>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@ export default function Supervisors() {
                                                 <td>{user.username}</td>
                                                 <td>
                                                     <div className="form-button-action">
-                                                        {props.edit && (
+
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-link btn-primary btn-lg"
@@ -105,7 +105,7 @@ export default function Supervisors() {
                                                             >
                                                                 <i className="fa fa-edit" />
                                                             </button>
-                                                        )}
+
                                                         <button
                                                             type="button"
                                                             className="btn btn-link btn-danger"
@@ -113,15 +113,16 @@ export default function Supervisors() {
                                                         >
                                                             <i className="fa fa-times" />
                                                         </button>
-                                                        {props.show && (
+
+
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-link btn-info"
-                                                                onClick={() => handleShowMoreInfo(user.id,getUserRoleNum())}
+                                                                onClick={() => handleShowMoreInfo(user.id)}
                                                             >
                                                                 <i className="fa fa-info-circle" />
                                                             </button>
-                                                        )}
+
                                                     </div>
                                                 </td>
                                             </tr>
