@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssigmentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
@@ -39,3 +40,11 @@ Route::get('/subjects/{id}', [SubjectController::class, 'show']);
 Route::put('/subjects/{id}', [SubjectController::class, 'update']);
 
 Route::delete('/subjects/{id}', [SubjectController::class, 'destroy']);
+
+//---------------- Supjects -----------------------------------------
+
+Route::get('/assigments', [AssigmentController::class, 'index']);
+Route::post('/assigments', [AssigmentController::class, 'store']);
+Route::get('/assigments/{id}', [AssigmentController::class, 'show']);
+Route::put('/assigments/{id}', [AssigmentController::class, 'update']);
+Route::delete('/assigments/{id}', [AssigmentController::class, 'destroy']);

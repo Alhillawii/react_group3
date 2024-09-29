@@ -202,7 +202,8 @@ export default function SubjectInfo() {
                   </div>
                 </div>
 
-                <table className="table table-bordered table-hover" id="add-row">
+                <div className="table-responsive">
+                <table id="add-row" className="display table table-striped table-hover">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -210,7 +211,7 @@ export default function SubjectInfo() {
                       <th>Semester</th>
                       <th>Class ID</th>
                       <th>Teacher ID</th>
-                      <th>Actions</th>
+                      <th style={{ width: '10%' }}>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -222,13 +223,30 @@ export default function SubjectInfo() {
                         <td>{subject.school_class_id}</td>
                         <td>{subject.teacher_id}</td>
                         <td>
-                          <button onClick={() => handleEditClick(subject)} data-bs-toggle="modal" data-bs-target="#editRowModal" className="btn btn-warning">Edit</button>
-                          <button onClick={() => handleDelete(subject.id)} className="btn btn-danger">Delete</button>
+                          <div className="form-button-action">
+                            <button
+                              type="button"
+                              className="btn btn-link btn-primary btn-lg"
+                              data-bs-toggle="modal"
+                              data-bs-target="#editRowModal"
+                              onClick={() => handleEditClick(subject)}
+                            >
+                              <i className="fa fa-edit" />
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-link btn-danger"
+                              onClick={() => handleDelete(subject.id)}
+                            >
+                              <i className="fa fa-times" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>
