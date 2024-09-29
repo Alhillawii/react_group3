@@ -10,6 +10,7 @@ import TeacherDetails from './pages/dashboard/TeacherDetails.jsx';
 import Managers from './pages/dashboard/Managers.jsx';
 import AddManager from './pages/dashboard/AddManager.jsx';
 import ManagerDetails from './pages/dashboard/ManagerDetails.jsx';
+import Events from './pages/dashboard/Events.jsx';
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import AddTeacher from './pages/dashboard/AddTeacher.jsx';
@@ -32,7 +33,6 @@ function App() {
                             <Route path="/managers/add" element={<AddManager />} />
                                    <Route path="/managers/:id" element={<ManagerDetails />} />
                             <Route path="/managers/edit/:id" element={<EditManager />} /> 
-
                             <Route path="/teachers" element={<Teachers />} />
                                    <Route path="/teachers/:id" element={<TeacherDetails />} />
                                     <Route path="/teachers/add" element={<AddTeacher />} />
@@ -40,6 +40,9 @@ function App() {
                             <Route path="/teachers/edit/:id" element={<EditTeacher />} /> 
 
                             <Route path="/messages" element={<Messages />} />
+                            <Route path="/events" element={<Events />} />
+
+
                         </Routes>
                     </div>
                 </div>
