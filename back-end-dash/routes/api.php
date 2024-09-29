@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +44,11 @@ Route::delete('messageDelete/{id}',[MessageController::class,'destroy']);
     Route::post('/add_managers', [ManagerController::class, 'store']);     
     Route::put('/managersUpdate/{id}', [ManagerController::class, 'update']); 
     Route::delete('/managersDelete/{id}', [ManagerController::class, 'destroy']);
+
+//---------------- Managers -----------------------------------------
+    Route::get('events', [EventController::class, 'index']);      
+    Route::get('/events/{id}', [EventController::class, 'show']); 
+    Route::post('/add_event', [EventController::class, 'store']);     
+    Route::put('/eventUpdate/{id}', [EventController::class, 'update']); 
+    Route::delete('/eventsDelete/{id}', [EventController::class, 'destroy']);
+    
