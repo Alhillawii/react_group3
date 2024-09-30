@@ -47,7 +47,7 @@ export default function Supervisors() {
     };
 
     const handleShowMoreInfo = (userId) => {
-        navigate(`supervisor/${userId}`);
+        navigate(`${userId}`);
     };
 
     return (
