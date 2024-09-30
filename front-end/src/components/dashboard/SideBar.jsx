@@ -32,7 +32,7 @@ function SideBar() {
                 </div>
                 {/* End Logo Header */}
             </div>
-            <div className="sidebar-wrapper scrollbar scrollbar-inner">
+            <div>
                 <div className="sidebar-content">
 
                     <ul className="nav nav-secondary">

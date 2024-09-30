@@ -19,6 +19,7 @@ import EditTeacher from './pages/dashboard/EditTeacher.jsx';
 import TeacherDetails from './pages/dashboard/TeacherDetails.jsx';
 import Assigment from "./pages/dashboard/Assigment.jsx";
 import Subjects from './pages/dashboard/Subjects.jsx';
+import Adminprof from './pages/dashboard/Adminprof.jsx';
 
 const AdminRoutes = () => (
     <Routes>
@@ -41,6 +42,7 @@ const AdminRoutes = () => (
         <Route path="teachers/edit/:id" element={<EditTeacher />} />
         <Route path="supervisors" element={<Supervisors />} />
         <Route path="students" element={<Students />} />
+        <Route path="adminprof" element={<Adminprof />} />
     </Routes>
 );
 

@@ -17,7 +17,8 @@ class Teacher extends Model
 
     protected $fillable = [
         'salary',
-        'degree'
+        'degree',
+        
     ];
 
     public function assigment()

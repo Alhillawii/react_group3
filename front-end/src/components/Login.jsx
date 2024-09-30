@@ -23,8 +23,10 @@ const Login = () => {
             }  else {
                 navigate('/');
             }
-        } catch (error) {
-            console.error("Login failed:", error);
+        } catch (err) {
+            // console.error("Login failed:", error);
+            console.log('Error details:', err.response ? err.response.data : err.message);
+
         }
     };
 

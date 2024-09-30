@@ -30,14 +30,16 @@ function AdminLayout({ children }) {
 }
 
 function App() {
+
+    
     return (
         <AuthProvider>
         <Router>
             <Routes>
-                <Route path="/" element={<UserRoutes />} />
+                <Route path="/*" element={<UserRoutes />} />
                 <Route path="/login" element={<Login />} />
                 <Route
-                    path="/admin/"
+                    path="/admin/*"
                     element={
                         <ProtectedRoute allowedRoles={[1,2,3]}>
                             <AdminLayout>

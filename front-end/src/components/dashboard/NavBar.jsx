@@ -45,29 +45,28 @@ function NavBar() {
                                     <li>
                                         <Link 
                                             className="dropdown-item" 
-                                            to="/admin-profile" 
+                                            to="/admin/adminprof" 
                                             onClick={(e) => {
-                                                e.preventDefault(); // Prevent default anchor behavior
-                                                // Logic to navigate to the admin profile without scrolling
-                                                window.location.href = '/admin-profile'; // Example navigation
+                                                window.scrollTo(0, 0); // Scroll to the top when navigating
                                             }}
                                         >
                                             Admin Profile
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link 
-                                            className="dropdown-item" 
-                                            to="/logout" 
-                                            onClick={(e) => {
-                                                e.preventDefault(); // Prevent default anchor behavior
-                                                // Logic to navigate to the logout
-                                                window.location.href = '/logout'; // Example navigation
-                                            }}
-                                        >
-                                            Logout
-                                        </Link>
-                                    </li>
+    <Link 
+        className="dropdown-item" 
+        to="/logout" 
+        onClick={(e) => {
+            e.preventDefault(); // Prevent default anchor behavior
+            window.scrollTo(0, 0); // Ensure the window doesn't scroll when navigating
+        }}
+    >
+        <i className="fas fa-sign-out-alt"></i> {/* Font Awesome Logout Icon */}
+        Logout
+    </Link>
+</li>
+
                                 </ul>
                             </li>
                         </ul>
