@@ -1,5 +1,5 @@
-import{ useState } from 'react';
-// import { FaChevronDown, FaChevronUp } from 'react-icons/fa'; // Importing chevron icons
+import React, { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'; // Importing chevron icons
 
 const FAQItem = ({ question, answer, isOpen, toggle }) => {
     return (
@@ -10,7 +10,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
                 style={{ cursor: 'pointer' }}
             >
                 {question}
-                {/*{isOpen ? <FaChevronUp /> : <FaChevronDown />} /!* Toggle icon based on isOpen *!/*/}
+                {isOpen ? <FaChevronUp /> : <FaChevronDown />} {/* Toggle icon based on isOpen */}
             </h5>
             {isOpen && <p className="answer">{answer}</p>}
         </div>
@@ -53,7 +53,7 @@ export default function FAQ() {
             <div className="container-xxl py-5">
                 <div className="container">
                     <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-                        <h6 className="section-title bg-white text-center text-primary px-3">FAQs</h6>
+                        <h6 className="section-title bg-white text-center  px-3" style={{color:'#06BBCC'}}>FAQs </h6>
                         <h1 className="mb-5">Frequently Asked Questions</h1>
                     </div>
                     <div className="row g-4">

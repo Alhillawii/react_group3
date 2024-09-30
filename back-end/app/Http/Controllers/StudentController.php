@@ -18,11 +18,11 @@ class StudentController extends Controller
             'results'=>$students
         ],200);
     }
-
     public function store(Request $request)
     {
         try {
             DB::beginTransaction();
+
 
             // Create a new User first
             $userData = [
@@ -40,6 +40,7 @@ class StudentController extends Controller
 
 
             if ($request->hasFile('image')) {
+
                 $imageFile = $request->file('image');
                 $filename = time() . '_' . preg_replace('/\s+/', '_', pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $imageFile->getClientOriginalExtension();
                 $imageFile->storeAs('public/images', $filename); // Store the image
@@ -50,10 +51,12 @@ class StudentController extends Controller
             $studentData = [
                 'id' => $user->id,
                 'parent_name' => $request->parent_name,
+
                 'school_class_id' => $request->school_class_id,
             ];
 
             if ($request->hasFile('national_img')) {
+
                 $imageFile = $request->file('national_img');
                 $filename = time() . '_' . preg_replace('/\s+/', '_', pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $imageFile->getClientOriginalExtension();
                 $imageFile->storeAs('public/images', $filename); // Store the image
@@ -67,6 +70,7 @@ class StudentController extends Controller
             $user->student_id = $student->id;
             $user->save();
 
+
             DB::commit();
 
             return response()->json([
@@ -79,6 +83,8 @@ class StudentController extends Controller
             DB::rollBack();
 
 
+
+
             return response()->json([
                 'message' => 'Something went wrong',
                 'error' => $e->getMessage(),
@@ -86,10 +92,6 @@ class StudentController extends Controller
             ], 500);
         }
     }
-
-
-
-
 
     public function show($id)  {
         $student = User::with('student')

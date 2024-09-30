@@ -37,4 +37,5 @@ class MessageController extends Controller
             'message'=>'deleted successfully'
         ],200);
     }
+
 }

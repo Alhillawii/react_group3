@@ -28,7 +28,6 @@ export default function Table(props) {
     };
 
 
-
     const handleDelete = async (id) => {
         try {
             await axios.delete(`${props.deleteUrl}/${id}`);

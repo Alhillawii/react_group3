@@ -22,12 +22,10 @@ import Managers from "./pages/dashboard/Managers.jsx";
 import AddManager from './pages/dashboard/AddManager.jsx';
 import ManagerDetails from './pages/dashboard/ManagerDetails.jsx';
 import EditManager from './pages/dashboard/EditManager.jsx';
-
 import Teachers from "./pages/dashboard/Teachers.jsx";
 import AddTeacher from './pages/dashboard/AddTeacher.jsx';
 import EditTeacher from './pages/dashboard/EditTeacher.jsx';
 import TeacherDetails from './pages/dashboard/TeacherDetails.jsx';
-
 
 const AdminRoutes = () => (
     <Routes>

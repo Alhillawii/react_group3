@@ -95,7 +95,7 @@ export default function ContactLand() {
       style={{ backgroundColor: "#f8f9fa" }}
     >
       <div className="container">
-        <h2 className="text-center mb-4" style={{ color: "#181d38" }}>
+        <h2 className="text-center mb-4" style={{color:'#06BBCC'}}>
           Contact Us
         </h2>
 

@@ -22,7 +22,7 @@ export default function About() {
                             </div>
                         </div>
                         <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                            <h6 className="section-title bg-white text-start text-primary pe-3">
+                            <h6 className="section-title bg-white text-start pe-3" style={{color:'#06BBCC'}}>
                                 About Us
                             </h6>
                             <h1 className="mb-4">Welcome to eLEARNING</h1>
@@ -96,7 +96,7 @@ export default function About() {
                                     </p>
                                 </div>
                             </div>
-                            <a className="btn btn-primary py-3 px-5 mt-2" href="">
+                            <a className="btn btn-primary py-3 px-5 mt-2" href="" style={{backgroundColor:'#06BBCC'}}>
                                 Read More
                             </a>
                         </div>

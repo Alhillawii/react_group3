@@ -28,5 +28,4 @@ class StudentFactory extends Factory
             'updated_at' => now(),
         ];
     }
-
 }

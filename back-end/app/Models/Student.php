@@ -31,7 +31,6 @@ class Student extends Model
         return $this->hasOne(User::class);
     }
 
-
     public function feedback()
     {
         return $this->hasMany(Feedback::class);
