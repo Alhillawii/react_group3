@@ -32,42 +32,105 @@ class ManagerController extends Controller
         ], 200);
     }
 
-    public function store(ManagerStoreRequest $request)
+    //zaina
+//    public function store(ManagerStoreRequest $request)
+//    {
+//        try {
+//
+//
+//            if (User::where('email', $request->email)->exists()) {
+//                return response()->json([
+//                    'message' => 'Email already exists.',
+//                ], 400); // Bad Request
+//            }
+//            $user = User::create([
+//                'Full_name' => $request->Full_name,
+//                'username' => $request->username,
+//                'email' => $request->email,
+//                'password' => bcrypt($request->password),
+//                'role_id' => 3,
+//                'address' => $request->address,
+//                'DOB' => $request->dob,
+//                'gender' => $request->gender,
+//                'phone' => $request->phone,
+//                'image' => $request->image,
+//            ]);
+//
+//            $manager = Manager::create([
+//                'id' => $user->id,
+//
+//            ]);
+//
+//            $user->manager_id = $manager->id;
+//            $user->save();
+//
+//            return response()->json([
+//                'message' => 'Manager created successfully',
+//                'manager' => $manager->load('user')
+//            ], 201);
+//        } catch (Exception $e) {
+//            return response()->json([
+//                'message' => 'Something went wrong',
+//                'error' => $e->getMessage()
+//            ], 500);
+//        }
+//    }
+
+// abood
+    public function store(Request $request)
     {
         try {
+            // Validate input data
+            $validatedData = $request->validate([
+                'Full_name' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6',
+                'address' => 'nullable|string|max:255',
+                'DOB' => 'nullable|date',
+                'gender' => 'nullable|string|in:male,female',
+                'phone' => 'nullable|string|max:20',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+            ]);
 
-
-            if (User::where('email', $request->email)->exists()) {
-                return response()->json([
-                    'message' => 'Email already exists.',
-                ], 400); // Bad Request
-            }
-            $user = User::create([
-                'Full_name' => $request->Full_name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
+            // Prepare user data
+            $userData = [
+                'Full_name' => $validatedData['Full_name'],
+                'username' => $validatedData['username'],
+                'email' => $validatedData['email'],
+                'password' => bcrypt($validatedData['password']),
                 'role_id' => 3,
-                'address' => $request->address,
-                'DOB' => $request->dob,
-                'gender' => $request->gender,
-                'phone' => $request->phone,
-                'image' => $request->image,
+                'address' => $validatedData['address'] ?? null,
+                'DOB' => $validatedData['DOB'] ?? null,
+                'gender' => $validatedData['gender'] ?? null,
+                'phone' => $validatedData['phone'] ?? null,
+            ];
+
+            // Handle image upload if provided
+            if ($request->hasFile('image')) {
+                $imageFile = $request->file('image');
+                $filename = time() . '_' . preg_replace('/\s+/', '_', pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $imageFile->getClientOriginalExtension();
+                $imageFile->storeAs('public/Manager', $filename); // Store the image
+                $userData['image'] = $filename;
+            }
+
+            $user = User::create($userData);
+
+            $Manager = Manager::create([
+                'id'=>$user->id,
+
             ]);
 
-            $manager = Manager::create([
-                'id' => $user->id,
-
-            ]);
-
-            $user->manager_id = $manager->id;
+            $user->Manager_id = $Manager->id;
             $user->save();
 
             return response()->json([
-                'message' => 'Manager created successfully',
-                'manager' => $manager->load('user')
+                'status' => true,
+                'message' => "Manager created successfully"
             ], 201);
-        } catch (Exception $e) {
+
+        } catch (\Exception $e) {
+            // Catch any exceptions and return an error response
             return response()->json([
                 'message' => 'Something went wrong',
                 'error' => $e->getMessage()
