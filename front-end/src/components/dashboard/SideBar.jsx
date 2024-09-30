@@ -81,6 +81,18 @@ function SideBar() {
                                 <p>Classes</p>
                             </NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink
+
+                                to="/admin/events"
+                                className="collapsed"
+                                aria-expanded="false"
+                            >
+                                <i className="fas fa-home"/>
+                                <p>Events</p>
+                            </NavLink>
+                            <div className="collapse"></div>
+                        </li>
                     </ul>
                 </div>
             </div>

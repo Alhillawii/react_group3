@@ -92,3 +92,9 @@ Route::post('/assigments', [AssigmentController::class, 'store']);
 Route::get('/assigments/{id}', [AssigmentController::class, 'show']);
 Route::put('/assigments/{id}', [AssigmentController::class, 'update']);
 Route::delete('/assigments/{id}', [AssigmentController::class, 'destroy']);
+//---------------- Events -----------------------------------------
+    Route::get('events', [EventController::class, 'index']);      
+    Route::get('/events/{id}', [EventController::class, 'show']); 
+    Route::post('/add_event', [EventController::class, 'store']);     
+    Route::put('/eventUpdate/{id}', [EventController::class, 'update']); 
+    Route::delete('/eventsDelete/{id}', [EventController::class, 'destroy']);

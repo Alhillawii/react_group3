@@ -27,6 +27,8 @@ import AddTeacher from './pages/dashboard/AddTeacher.jsx';
 import EditTeacher from './pages/dashboard/EditTeacher.jsx';
 import TeacherDetails from './pages/dashboard/TeacherDetails.jsx';
 
+import Events from './pages/dashboard/Events.jsx';
+
 const AdminRoutes = () => (
     <Routes>
         <Route path="dashboard" element={<MainDash />} />
@@ -56,6 +58,10 @@ const AdminRoutes = () => (
         <Route path="students/add" element={<AddStudent />} />
         <Route path="students/:id" element={<StudentDetails />} />
         {/*<Route path="students/edit/:id" element={<EditStudent />} />*/}
+
+        <Route path="/events" element={<Events />} />
+
+
     </Routes>
 );
 
