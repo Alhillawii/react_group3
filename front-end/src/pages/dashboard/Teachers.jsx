@@ -86,9 +86,11 @@ export default function Teachers() {
                                                   <i className="fa fa-edit" />
                                                     </button>
                                                     </NavLink>
+
                                                     <NavLink to={`${teacher.id}`}>
                                                         <i className="fa fa-eye" aria-hidden="true"></i>
                                                     </NavLink>
+
                                                     <button
                                                     className="btn btn-link btn-danger"
                                                     onClick={() => handleDelete(teacher.id)}

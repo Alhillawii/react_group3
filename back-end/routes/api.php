@@ -27,7 +27,7 @@ Route::put('userUpdate/{id}',[UserController::class,'update']);
 Route::delete('userDelete/{id}',[UserController::class,'destroy']);
 
 //------------------ Student -----------------------------------
-Route::get('student',[StudentController::class,'index']);
+Route::get('students',[StudentController::class,'index']);
 Route::get('student/{id}',[StudentController::class,'show']);
 Route::post('add_student',[StudentController::class,'store']);
 Route::put('studentUpdate/{id}',[StudentController::class,'update']);
