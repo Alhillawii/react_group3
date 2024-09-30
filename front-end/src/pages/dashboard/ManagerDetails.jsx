@@ -36,19 +36,19 @@ const ManagerDetail = () => {
                             <div className="col-md-4">
                                 <img
                                     src={manager.image}
-                                    alt={manager.user.Full_name}
+                                    alt={manager.Full_name}
                                     className="img-fluid rounded-circle"
                                     style={{ maxWidth: '200px' }}
                                 />
                             </div>
                             <div className="col-md-8">
-                                <h5 className="card-title">{manager.user.Full_name}</h5>
-                                <p className="card-text"><strong>Username:</strong> {manager.user.username}</p>
-                                <p className="card-text"><strong>Email:</strong> {manager.user.email}</p>
-                                <p className="card-text"><strong>Address:</strong> {manager.user.address}</p>
-                                <p className="card-text"><strong>Date of Birth:</strong> {manager.user.DOB}</p>
-                                <p className="card-text"><strong>Gender:</strong> {manager.user.gender}</p>
-                                <p className="card-text"><strong>Phone:</strong> {manager.user.phone}</p>
+                                <h5 className="card-title">{manager.Full_name}</h5>
+                                <p className="card-text"><strong>Username:</strong> {manager.username}</p>
+                                <p className="card-text"><strong>Email:</strong> {manager.email}</p>
+                                <p className="card-text"><strong>Address:</strong> {manager.address}</p>
+                                <p className="card-text"><strong>Date of Birth:</strong> {manager.DOB}</p>
+                                <p className="card-text"><strong>Gender:</strong> {manager.gender}</p>
+                                <p className="card-text"><strong>Phone:</strong> {manager.phone}</p>
                                 <p className="card-text"><strong>Salary:</strong> {manager.salary}</p>
                                 <p className="card-text"><strong>Degree:</strong> {manager.degree}</p>
                             </div>

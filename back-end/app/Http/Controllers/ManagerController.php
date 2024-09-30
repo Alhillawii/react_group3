@@ -77,10 +77,10 @@ class ManagerController extends Controller
 
     public function show($id)
     {
-        $manager = Manager::with('user')->find($id);
+        $manager = User::where('id', $id)->where('role_id', 3)->first();
         if (!$manager) {
             return response()->json([
-                'message' => 'Manager Not Found'
+                'message' => 'Supervisor Not Found'
             ], 404);
         }
         return response()->json([

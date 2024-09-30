@@ -39,7 +39,7 @@ export default function Managers() {
     return (
         <div className="container">
             <div className="page-inner">
-                <div className="page-header">
+                <div>
                     <h3 className="fw-bold mb-3">Manager Info</h3>
                 </div>
                 <div className="row">
@@ -71,12 +71,12 @@ export default function Managers() {
                                                 <td>{manager.username}</td>
                                                 <td>{manager.email}</td>
                                                 <td>
-                                                    <NavLink to={`/managers/edit/${manager.id}`}>
+                                                    <NavLink to={`edit/${manager.id}`}>
                                                         <button className="btn btn-link btn-primary btn-lg">
                                                             <i className="fa fa-edit" />
                                                         </button>
                                                     </NavLink>
-                                                    <NavLink to={`/managers/${manager.id}`}>
+                                                    <NavLink to={`${manager.id}`}>
                                                         <i className="fa fa-eye" aria-hidden="true"></i>
                                                     </NavLink>
                                                     <button
