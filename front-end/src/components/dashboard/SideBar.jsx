@@ -1,23 +1,19 @@
-import { Link } from "react-router-dom";
-// import  { useContext } from 'react';
-// import { AuthContext } from '../../context/AuthContext';
-function SideBar() {
-    // const { auth } = useContext(AuthContext);
-    // const adminRoles = [1,2,3];
-   return (
+import { NavLink } from "react-router-dom";
 
+function SideBar() {
+    return (
         <div className="sidebar" data-background-color="dark">
             <div className="sidebar-logo">
                 {/* Logo Header */}
                 <div className="logo-header" data-background-color="dark">
-                    <Link to="/admin/dashboard" className="logo">
+                    <NavLink to="/admin/dashboard" className="logo">
                         <img
                             src="public/img/kaiadmin/logo_light.svg"
                             alt="navbar brand"
                             className="navbar-brand"
                             height={20}
                         />
-                    </Link>
+                    </NavLink>
                     <div className="nav-toggle">
                         <button className="btn btn-toggle toggle-sidebar">
                             <i className="gg-menu-right"/>
@@ -34,135 +30,61 @@ function SideBar() {
             </div>
             <div className="sidebar-wrapper scrollbar scrollbar-inner">
                 <div className="sidebar-content">
-
                     <ul className="nav nav-secondary">
-                        <li className="nav-item active">
-                            <Link to="/admin/dashboard"
-
-
-                                  className="collapsed"
-                                  aria-expanded="false"
-                            >
-
+                        <li className="nav-item">
+                            <NavLink to="/admin/dashboard" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Dashboard</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/teachers"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/teachers" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Teachers</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/students"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
-                                <p>students</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            <NavLink to="/admin/students" className={({isActive}) => isActive ? "active" : ""}>
+                                <p>Students</p>
+                            </NavLink>
                         </li>
-
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/messages"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/messages" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Messages</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/managers"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/managers" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Managers</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
-
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/supervisors"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/supervisors" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Supervisors</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/feedback"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/feedback" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Feedback</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/assigments"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
-                                <p>Assigment</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            <NavLink to="/admin/assigments" className={({isActive}) => isActive ? "active" : ""}>
+                                <p>Assignment</p>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/subjects"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/subjects" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Subjects</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link
-
-                                to="/admin/classes"
-                                className="collapsed"
-                                aria-expanded="false"
-                            >
-
+                            <NavLink to="/admin/classes" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Classes</p>
-                            </Link>
-                            <div className="collapse"></div>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
     );
 }
 
