@@ -7,6 +7,7 @@ import Sidebar from './components/dashboard/Sidebar.jsx';
 import Navbar from './components/dashboard/Navbar.jsx';
 import Footer from './components/dashboard/Footer.jsx';
 import Login from './components/Login';
+import Register from './components/Register.jsx';
 import { AuthProvider } from './context/AuthContext';
 
 function AdminLayout({ children }) {
@@ -33,6 +34,8 @@ function App() {
             <Routes>
                 <Route path="/*" element={<UserRoutes />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
                 <Route
                     path="/admin/*"
                     element={
