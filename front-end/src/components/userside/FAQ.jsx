@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa'; // Importing chevron icons
+// import { FaChevronDown, FaChevronUp } from 'react-icons/fa'; // Importing chevron icons
 
 const FAQItem = ({ question, answer, isOpen, toggle }) => {
     return (
@@ -10,7 +10,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
                 style={{ cursor: 'pointer' }}
             >
                 {question}
-                {isOpen ? <FaChevronUp /> : <FaChevronDown />} {/* Toggle icon based on isOpen */}
+                {/* Toggle icon based on isOpen */}
             </h5>
             {isOpen && <p className="answer">{answer}</p>}
         </div>

@@ -5,7 +5,6 @@ import 'datatables.net-bs5';
 import Swal from 'sweetalert';
 
 
-
 export default function AssignmentInfo() {
   const [assignmentData, setAssignmentData] = useState([]);
   const [newAssignment, setNewAssignment] = useState({ title: '', attachment: '', teacher_id: '' });
@@ -90,11 +89,15 @@ export default function AssignmentInfo() {
       });
       setAssignmentData((prev) => [...prev, response.data]);
       setNewAssignment({ title: '', attachment: '', teacher_id: '' });
-      $('#addRowModal').modal('hide');
+      
+
+
+      Swal("Success!", "Assignment added successfully!", "success");
     } catch (err) {
       console.error('Error adding assignment', err);
+      Swal("Error!", "An error occurred while adding the assignment.", "error");
     }
-  };
+};
 
   const handleEditClick = (assignment) => {
     setEditAssignment({ id: assignment.id, title: assignment.title, attachment: assignment.attachment, teacher_id: assignment.teacher_id });
@@ -113,9 +116,10 @@ export default function AssignmentInfo() {
         },
       });
       setAssignmentData((prev) => prev.map((assignment) => (assignment.id === editAssignment.id ? { ...assignment, ...editAssignment } : assignment)));
-      $('#editRowModal').modal('hide');
+      $('#editRowModal');
     } catch (err) {
-      console.error('Error editing assignment', err);
+      console.log('Error details:', err.response ? err.response.data : err.message);
+      // console.error('Error editing assignment', err);
       Swal("Error updating assignment: " + err.message, { icon: "error" });
     }
   };
@@ -328,4 +332,3 @@ export default function AssignmentInfo() {
     </div>
   );
 }
-
