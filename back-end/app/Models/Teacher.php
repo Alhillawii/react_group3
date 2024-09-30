@@ -16,6 +16,7 @@ class Teacher extends Model
     use HasFactory , SoftDeletes;
 
     protected $fillable = [
+        'id',
         'salary',
         'degree'
     ];
@@ -37,7 +38,7 @@ class Teacher extends Model
         return $this->hasOne(User::class);
     }
 
-    
+
     public function feedback()
     {
         return $this->hasMany(Feedback::class);

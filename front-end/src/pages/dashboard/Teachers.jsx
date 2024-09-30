@@ -84,7 +84,7 @@ export default function Teachers() {
                                                     <NavLink to={`/teachers/edit/${teacher.id}`}> <button                                 className="btn btn-link btn-primary btn-lg"
                                                     ><i className="fa fa-edit" /></button>
                                                     </NavLink>
-                                                    <NavLink to={`/teachers/${teacher.id}`}>
+                                                    <NavLink to={`${teacher.id}`}>
                                                         <i className="fa fa-eye" aria-hidden="true"></i>
                                                     </NavLink>
                                                     <button

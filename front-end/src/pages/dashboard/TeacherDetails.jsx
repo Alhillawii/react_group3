@@ -35,7 +35,7 @@ const TeacherDetails = () => {
                         <div className="row">
                             <div className="col-md-4">
                                 <img
-                                    src={teacher.image}
+                                    src={`http://127.0.0.1:8000/storage/teacher/${teacher.user.image}`}
                                     alt={teacher.user.Full_name}
                                     className="img-fluid rounded-circle"
                                     style={{ maxWidth: '200px' }}

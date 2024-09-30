@@ -77,6 +77,7 @@ class TeacherController extends Controller
             $user = User::create($userData);
 
             $teacher = Teacher::create([
+                'id'=>$user->id,
                 'user_id' => $user->id,
                 'salary' => $request->salary,
                 'degree' => $request->degree,
@@ -100,50 +101,7 @@ class TeacherController extends Controller
     }
 
 
-//    public function store(Request $request)
-//    {
-//        try {
-//            DB::beginTransaction();
-//            $userData = [
-//                'Full_name' => $request->Full_name,
-//                'username' => $request->username,
-//                'email' => $request->email,
-//                'password' => bcrypt($request->password),
-//                'role_id' => 1,
-//                'address' => $request->address,
-//                'DOB' => $request->dob,
-//                'gender' => $request->gender,
-//                'phone' => $request->phone,
-//            ];
-//
-//            if ($request->hasFile('image')) {
-//                $image = $request->file('image');
-//                $imageName = time() . '.' . $image->getClientOriginalExtension();
-//                $image->move(public_path('images'), $imageName);
-//                $userData['image'] = 'images/' . $imageName;
-//            }
-//            $user = User::create($userData);
-//
-//            $teacher = Teacher::create([
-//                'user_id' => $user->id,
-//                'salary' => $request->salary,
-//                'degree' => $request->degree,
-//            ]);
-//            $user->teacher_id = $teacher->id;
-//            $user->save();
-//            DB::commit();
-//
-//            return response()->json([
-//                'message' => 'Teacher created successfully',
-//                'teacher' => $teacher->load('user')
-//            ], 201);
-//        } catch (Exception $e) {
-//            return response()->json([
-//                'message' => 'Something went wrong',
-//                'error' => $e->getMessage()
-//            ], 500);
-//        }
-//    }
+
 
     public function show($id)
     {
