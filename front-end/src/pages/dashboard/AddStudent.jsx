@@ -39,7 +39,7 @@ export default function AddStudent() {
         if (!newStudent.password) newErrors.password = 'Password is required';
         if (!newStudent.parent_name) newErrors.parent_name = 'Parent Name is required';
         if (!newStudent.school_class_id) newErrors.school_class_id = 'School Class ID is required';
-        // Add other validations as needed
+
         return newErrors;
     };
 

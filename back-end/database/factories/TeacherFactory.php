@@ -17,6 +17,7 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
+            'id' => null,
             'salary' => $this->faker->randomFloat(2, 3000, 10000),  // Generates a salary between 3000 and 10000
             'degree' => $this->faker->randomElement(['Bachelor', 'Master', 'PhD']),  // Random degree value
             'created_at' => now(),

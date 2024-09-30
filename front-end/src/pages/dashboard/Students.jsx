@@ -4,7 +4,7 @@ import $ from 'jquery';
 import 'datatables.net-bs5';
 import { useNavigate } from 'react-router-dom';
 
-export default function Table(props) {
+export default function Table() {
     const [userData, setUserData] = useState([]);
     const navigate = useNavigate();
 
@@ -46,8 +46,8 @@ export default function Table(props) {
         navigate(`/user-update/${userId}`);
     };
 
-    const handleShowMoreInfo = (userId,roleId) => {
-        navigate(`/user/${roleId}/${userId}`);
+    const handleShowMoreInfo = (userId) => {
+        navigate(`${userId}`);
     };
 
     return (
@@ -97,7 +97,7 @@ export default function Table(props) {
                                                 <td>{user.username}</td>
                                                 <td>
                                                     <div className="form-button-action">
-                                                        {props.edit && (
+
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-link btn-primary btn-lg"
@@ -105,7 +105,7 @@ export default function Table(props) {
                                                             >
                                                                 <i className="fa fa-edit" />
                                                             </button>
-                                                        )}
+
                                                         <button
                                                             type="button"
                                                             className="btn btn-link btn-danger"
@@ -113,15 +113,15 @@ export default function Table(props) {
                                                         >
                                                             <i className="fa fa-times" />
                                                         </button>
-                                                        {props.show && (
+
                                                             <button
                                                                 type="button"
                                                                 className="btn btn-link btn-info"
-                                                                onClick={() => handleShowMoreInfo(user.id,getUserRoleNum())}
+                                                                onClick={() => handleShowMoreInfo(user.id)}
                                                             >
-                                                                <i className="fa fa-info-circle" />
+                                                                <i className="fa fa-eye" />
                                                             </button>
-                                                        )}
+
                                                     </div>
                                                 </td>
                                             </tr>
