@@ -10,10 +10,10 @@ export default function AddTeacher() {
         email: '',
         password: '',
         address: '',
-        dob: '',
+        DOB: '',
         gender: '',
         phone: '',
-        image: '',
+        image: null, // Set initial value as null for file input
         salary: '',
         degree: '',
     });
@@ -22,7 +22,12 @@ export default function AddTeacher() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setNewTeacher((prev) => ({ ...prev, [name]: value }));
+        if (name === 'image') {
+            // Handle image upload separately
+            setNewTeacher((prev) => ({ ...prev, [name]: e.target.files[0] }));
+        } else {
+            setNewTeacher((prev) => ({ ...prev, [name]: value }));
+        }
         setErrors((prev) => ({ ...prev, [name]: '' }));
     };
 
@@ -33,7 +38,7 @@ export default function AddTeacher() {
         if (!newTeacher.email) newErrors.email = 'Email is required';
         if (!newTeacher.password) newErrors.password = 'Password is required';
         if (!newTeacher.address) newErrors.address = 'Address is required';
-        if (!newTeacher.dob) newErrors.dob = 'Date of Birth is required';
+        if (!newTeacher.DOB) newErrors.DOB = 'Date of Birth is required';
         if (!newTeacher.gender) newErrors.gender = 'Gender is required';
         if (!newTeacher.phone) newErrors.phone = 'Phone number is required';
         if (!newTeacher.image) newErrors.image = 'Image is required';
@@ -50,18 +55,39 @@ export default function AddTeacher() {
             return;
         }
 
+        // Prepare FormData to handle the file upload
+        const formData = new FormData();
+        formData.append('Full_name', newTeacher.Full_name);
+        formData.append('username', newTeacher.username);
+        formData.append('email', newTeacher.email);
+        formData.append('password', newTeacher.password);
+        formData.append('address', newTeacher.address);
+        formData.append('DOB', newTeacher.DOB);
+        formData.append('gender', newTeacher.gender);
+        formData.append('phone', newTeacher.phone);
+        formData.append('salary', newTeacher.salary);
+        formData.append('degree', newTeacher.degree);
+        if (newTeacher.image) {
+            formData.append('image', newTeacher.image); // Add image to form data
+        }
+
         try {
-            await axios.post('http://127.0.0.1:8000/api/add_teachers', newTeacher);
-            navigate('/teachers');
+            await axios.post('http://127.0.0.1:8000/api/add_teachers', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data', // Important for file uploads
+                },
+            });
+            navigate(-1);
         } catch (err) {
-            console.error('Error adding teacher', err);
+            // console.error('Error adding teacher', err);
+            console.log('Error details:', err.response ? err.response.data : err.message);
         }
     };
 
     return (
         <div className="container my-5">
             <div className="card shadow-sm p-4">
-                <h3 className="mb-4">Add New Manager</h3>
+                <h3 className="mb-4">Add New Teacher</h3>
                 <form onSubmit={handleAddTeacher}>
                     <div className="row">
                         <div className="col-md-6 mb-3">
@@ -134,12 +160,12 @@ export default function AddTeacher() {
                             <label>Date of Birth</label>
                             <input
                                 type="date"
-                                name="dob"
-                                value={newTeacher.dob}
+                                name="DOB"
+                                value={newTeacher.DOB}
                                 onChange={handleChange}
-                                className={`form-control ${errors.dob ? 'is-invalid' : ''}`}
+                                className={`form-control ${errors.DOB ? 'is-invalid' : ''}`}
                             />
-                            {errors.dob && <div className="invalid-feedback">{errors.dob}</div>}
+                            {errors.DOB && <div className="invalid-feedback">{errors.DOB}</div>}
                         </div>
                     </div>
 
@@ -214,7 +240,7 @@ export default function AddTeacher() {
 
                     <button type="submit" className="btn btn-primary mt-3">Add Teacher</button>
                     <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>
-                        Back
+                        Cancel
                     </button>
                 </form>
             </div>

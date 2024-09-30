@@ -48,7 +48,7 @@ export default function Managers() {
                             <div className="card-header">
                                 <div className="d-flex align-items-center">
                                     <h4 className="card-title">Add Manager</h4>
-                                    <NavLink to="/managers/add" className="btn btn-primary btn-round ms-auto">
+                                    <NavLink to="add" className="btn btn-primary btn-round ms-auto">
                                         <i className="fa fa-plus" /> Add Manager
                                     </NavLink>
                                 </div>

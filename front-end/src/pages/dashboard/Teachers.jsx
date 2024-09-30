@@ -52,7 +52,7 @@ export default function Teachers() {
                             <div className="card-header">
                                 <div className="d-flex align-items-center">
                                     <h4 className="card-title">Add Teacher</h4>
-                                    <NavLink to="/teachers/add" className="btn btn-primary btn-round ms-auto">
+                                    <NavLink to="add" className="btn btn-primary btn-round ms-auto">
                                         <i className="fa fa-plus" /> Add Teacher
                                     </NavLink>
                                 </div>

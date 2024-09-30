@@ -23,8 +23,6 @@ class StudentController extends Controller
         try {
             DB::beginTransaction();
 
-
-
             // Create a new User first
             $userData = [
                 'username' => $request->username,

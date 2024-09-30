@@ -2,7 +2,7 @@ import  { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function EditSupervisor({ getUserUrl, updateUserUrl }) {
+function EditSupervisor() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState({
@@ -22,7 +22,7 @@ function EditSupervisor({ getUserUrl, updateUserUrl }) {
         const fetchUser = async () => {
             try {
                 // setLoading(true);
-                const response = await axios.get(`${getUserUrl}/${id}`);
+                const response = await axios.get(`http://127.0.0.1:8000/api/supervisor/${id}`);
                 setUser(response.data.results);
                 // setLoading(false);
             } catch (err) {
@@ -32,7 +32,7 @@ function EditSupervisor({ getUserUrl, updateUserUrl }) {
         };
 
         fetchUser();
-    }, [id, getUserUrl]);
+    }, [id]);
 
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
@@ -48,7 +48,7 @@ function EditSupervisor({ getUserUrl, updateUserUrl }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`${updateUserUrl}/${id}`, user);
+            await axios.put(`http://127.0.0.1:8000/api/supervisorUpdate/${id}`, user);
             navigate(-1); // Go back to the previous page
         } catch (err) {
             console.log('Error details:', err.response ? err.response.data : err.message);

@@ -11,10 +11,11 @@ use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AssigmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
+Route::post('imgupload', [ImageController::class, 'imageUpload']);
 //----------------- Auth --------------------------------
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);

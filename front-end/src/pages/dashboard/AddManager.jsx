@@ -63,7 +63,7 @@ export default function AddManager() {
     return (
         <div className="container my-5">
             <div className="card shadow-sm p-4">
-                <h3 className="mb-4">Add New Teacher</h3>
+                <h3 className="mb-4">Add New Manager</h3>
                 <form onSubmit={handleAddTeacher}>
                     <div className="row">
                         <div className="col-md-6 mb-3">

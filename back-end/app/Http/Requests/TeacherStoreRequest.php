@@ -30,7 +30,7 @@ class TeacherStoreRequest extends FormRequest
             'DOB' => 'nullable|date',
             'gender' => 'nullable|string|in:male,female,other',
             'phone' => 'nullable|string|max:20',
-            'image' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'salary' => 'required|numeric|min:0',
             'degree' => 'required|string|max:255',
         ];

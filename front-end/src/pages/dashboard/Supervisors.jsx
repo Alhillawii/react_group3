@@ -39,11 +39,11 @@ export default function Supervisors() {
     };
 
     const handleAddClick = () => {
-        navigate('supervisor/add');
+        navigate('add');
     };
 
     const handleEditClick = (userId) => {
-        navigate(`supervisor/edit/${userId}`);
+        navigate(`edit/${userId}`);
     };
 
     const handleShowMoreInfo = (userId) => {
