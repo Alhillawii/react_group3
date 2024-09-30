@@ -17,7 +17,9 @@ class Student extends Model
 
     protected $fillable = [
         'parent_name',
-        'national_img'
+        'national_img',
+        'id',
+        'school_class_id'
     ];
 
     public function class() {
@@ -29,18 +31,18 @@ class Student extends Model
         return $this->hasOne(User::class);
     }
 
-    
+
     public function feedback()
     {
         return $this->hasMany(Feedback::class);
     }
-    
-    
+
+
     public function grade()
     {
         return $this->hasMany(Assigment_grade::class);
     }
-    
-    
+
+
 
 }

@@ -18,6 +18,7 @@ class StudentController extends Controller
             'results'=>$students
         ],200);
     }
+
     public function store(Request $request)
     {
         try {
@@ -39,30 +40,32 @@ class StudentController extends Controller
 
 
             if ($request->hasFile('image')) {
-                $userImagePath = $request->file('image');
-                $imageName = time() . '.' . $userImagePath->getClientOriginalExtension();
-                $userImagePath->move(public_path('images'), $imageName);
-                $userData['image'] = 'images/' . $imageName;
+                $imageFile = $request->file('image');
+                $filename = time() . '_' . preg_replace('/\s+/', '_', pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $imageFile->getClientOriginalExtension();
+                $imageFile->storeAs('public/images', $filename); // Store the image
+                $userData['image'] = $filename;
             }
             $user = User::create($userData);
 
-
-
-
-
-            $student = [
-                'ID' => $user->id, // Assuming User ID is used as Student ID
-                'parent_name' => $request->parent_name, // Note: There's a typo in the schema, it should probably be 'parent_name'
+            $studentData = [
+                'id' => $user->id,
+                'parent_name' => $request->parent_name,
                 'school_class_id' => $request->school_class_id,
             ];
 
             if ($request->hasFile('national_img')) {
-                $nationalImagePath = $request->file('national_img');
-                $imageName = time() . '.' . $nationalImagePath->getClientOriginalExtension();
-                $nationalImagePath->move(public_path('images'), $imageName);
-                $student['image'] = 'images/' . $imageName;
+                $imageFile = $request->file('national_img');
+                $filename = time() . '_' . preg_replace('/\s+/', '_', pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $imageFile->getClientOriginalExtension();
+                $imageFile->storeAs('public/images', $filename); // Store the image
+                $studentData['national_img'] = $filename;
             }
-            $student = Student::create($student);
+
+            $student = Student::create($studentData);
+
+
+
+            $user->student_id = $student->id;
+            $user->save();
 
             DB::commit();
 
@@ -75,13 +78,6 @@ class StudentController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
 
-            // If there was an error, delete any uploaded files
-            if (isset($userImagePath)) {
-                Storage::disk('public')->delete($userImagePath);
-            }
-            if (isset($nationalImagePath)) {
-                Storage::disk('public')->delete($nationalImagePath);
-            }
 
             return response()->json([
                 'message' => 'Something went wrong',
@@ -90,6 +86,11 @@ class StudentController extends Controller
             ], 500);
         }
     }
+
+
+
+
+
     public function show($id)  {
         $student = User::with('student')
             ->where('id', $id)

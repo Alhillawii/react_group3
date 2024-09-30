@@ -75,7 +75,6 @@ class TeacherController extends Controller
 
             $teacher = Teacher::create([
                 'id'=>$user->id,
-                'user_id' => $user->id,
                 'salary' => $request->salary,
                 'degree' => $request->degree,
             ]);

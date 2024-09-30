@@ -14,6 +14,9 @@ import SupervisorDetails from "./pages/dashboard/SupervisorDetails.jsx";
 import EditSupervisor from "./pages/dashboard/EditSupervisor.jsx";
 
 import Students from "./pages/dashboard/Students.jsx";
+import AddStudent from './pages/dashboard/AddStudent.jsx';
+import StudentDetails from './pages/dashboard/StudentDetails.jsx';
+import EditStudent from './pages/dashboard/EditStudent.jsx';
 
 import Managers from "./pages/dashboard/Managers.jsx";
 import AddManager from './pages/dashboard/AddManager.jsx';
@@ -52,6 +55,9 @@ const AdminRoutes = () => (
         <Route path="teachers/edit/:id" element={<EditTeacher />} />
         {/*  student routes  */}
         <Route path="students" element={<Students />} />
+        <Route path="students/add" element={<AddStudent />} />
+        <Route path="students/:id" element={<StudentDetails />} />
+        <Route path="students/edit/:id" element={<EditStudent />} />
     </Routes>
 );
 
