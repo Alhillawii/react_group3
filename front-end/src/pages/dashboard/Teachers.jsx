@@ -81,8 +81,10 @@ export default function Teachers() {
                                                 <td>{teacher.email}</td>
                                                 <td>{teacher.teacher ? teacher.teacher.degree : 'N/A'}</td>
                                                 <td>
-                                                    <NavLink to={`/teachers/edit/${teacher.id}`}> <button                                 className="btn btn-link btn-primary btn-lg"
-                                                    ><i className="fa fa-edit" /></button>
+                                                    <NavLink to={`edit/${teacher.id}`}>
+                                                        <button className="btn btn-link btn-primary btn-lg"  >
+                                                  <i className="fa fa-edit" />
+                                                    </button>
                                                     </NavLink>
                                                     <NavLink to={`${teacher.id}`}>
                                                         <i className="fa fa-eye" aria-hidden="true"></i>

@@ -10,17 +10,18 @@ export default function EditTeacher() {
         email: '',
         Full_name: '',
         address: '',
-        dob: '',
+        DOB: '',
         gender: '',
         phone: '',
-        image: '',
         salary: '',
         degree: ''
     });
+    const [imageFile, setImageFile] = useState(null);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         fetchTeacherData();
-    }, []);
+    }, [id]);
 
     const fetchTeacherData = async () => {
         try {
@@ -30,184 +31,79 @@ export default function EditTeacher() {
                 email: response.data.results.user.email,
                 Full_name: response.data.results.user.Full_name,
                 address: response.data.results.user.address,
-                dob: response.data.results.user.DOB,
+                DOB: response.data.results.user.DOB,
                 gender: response.data.results.user.gender,
                 phone: response.data.results.user.phone,
-                image: response.data.results.user.image,
                 salary: response.data.results.salary,
                 degree: response.data.results.degree,
             });
         } catch (error) {
             console.error('Error fetching teacher data', error);
+            setError('Failed to fetch teacher data. Please try again.');
         }
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setTeacherData({ ...teacherData, [name]: value });
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            setImageFile(files[0]);
+        } else {
+            setTeacherData({ ...teacherData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('_method', 'put');
+        Object.keys(teacherData).forEach(key => {
+            formData.append(key, teacherData[key]);
+        });
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
+
         try {
-            await axios.put(`http://127.0.0.1:8000/api/teachersUpdate/${id}`, teacherData);
+            const response = await axios.post(`http://127.0.0.1:8000/api/teachersUpdate/${id}`, formData);
+            console.log(response.data);
             navigate('/teachers');
         } catch (error) {
             console.error('Error updating teacher', error);
+            setError('Failed to update teacher. Please try again.');
         }
     };
+
+    if (error) {
+        return <div className="alert alert-danger">{error}</div>;
+    }
 
     return (
         <div className="container">
             <div className="page-inner">
-                <div className="page-header">
-                    <h3 className="fw-bold mb-3">Edit Teacher</h3>
-                    <ul className="breadcrumbs mb-3">
-                        <li className="nav-home">
-                            <a href="#">
-                                <i className="icon-home"></i>
-                            </a>
-                        </li>
-                        <li className="separator">
-                            <i className="icon-arrow-right"></i>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#">Teachers</a>
-                        </li>
-                        <li className="separator">
-                            <i className="icon-arrow-right"></i>
-                        </li>
-                        <li className="nav-item">
-                            <a href="#">Edit Teacher</a>
-                        </li>
-                    </ul>
-                </div>
-
+                <h3 className="fw-bold mb-3">Edit Teacher</h3>
                 <div className="card">
                     <div className="card-header">
                         <div className="card-title">Teacher Form</div>
                     </div>
-
                     <div className="card-body">
                         <form onSubmit={handleSubmit}>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label>Full Name</label>
-                                        <input
-                                            type="text"
-                                            name="Full_name"
-                                            value={teacherData.Full_name}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Full Name"
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Username</label>
-                                        <input
-                                            type="text"
-                                            name="username"
-                                            value={teacherData.username}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Username"
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Email</label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={teacherData.email}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Email"
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Address</label>
-                                        <input
-                                            type="text"
-                                            name="address"
-                                            value={teacherData.address}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Address"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label>Date of Birth</label>
-                                        <input
-                                            type="date"
-                                            name="dob"
-                                            value={teacherData.dob}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Gender</label>
-                                        <select
-                                            name="gender"
-                                            value={teacherData.gender}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                        >
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Phone</label>
-                                        <input
-                                            type="text"
-                                            name="phone"
-                                            value={teacherData.phone}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Phone Number"
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Salary</label>
-                                        <input
-                                            type="number"
-                                            name="salary"
-                                            value={teacherData.salary}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Salary"
-                                        />
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Degree</label>
-                                        <input
-                                            type="text"
-                                            name="degree"
-                                            value={teacherData.degree}
-                                            onChange={handleChange}
-                                            className="form-control"
-                                            placeholder="Degree"
-                                        />
-                                    </div>
-                                </div>
+                            {/* Your form fields here */}
+                            {/* ... */}
+                            <div className="form-group">
+                                <label>Image</label>
+                                <input
+                                    type="file"
+                                    name="image"
+                                    onChange={handleChange}
+                                    className="form-control"
+                                />
                             </div>
+                            {/* ... */}
                             <div className="card-action">
                                 <button type="submit" className="btn btn-success">
                                     Update Teacher
                                 </button>
-                                <button className="btn btn-secondary" onClick={() => navigate(-1)}>
+                                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
                                     Back
                                 </button>
                             </div>

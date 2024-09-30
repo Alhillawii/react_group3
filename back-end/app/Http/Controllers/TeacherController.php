@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TeacherStoreRequest;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
@@ -26,12 +27,8 @@ class TeacherController extends Controller
 //    }
 
 // abood
-    public function index()
-    {
-        $teachers = User::with('teacher')
-            ->where('role_id', 1)
-            ->get();
-
+    public function index()  {
+        $teachers = User::where('role_id', 1)->get();
         return response()->json([
             'results' => $teachers
         ], 200);
@@ -116,57 +113,150 @@ class TeacherController extends Controller
         ], 200);
     }
 
-    public function update(TeacherStoreRequest $request, $id)
+    // zaina
+//    public function update(TeacherStoreRequest $request, $id)
+//    {
+//        try {
+//            $teacher = Teacher::find($id);
+//            if (!$teacher) {
+//                return response()->json([
+//                    'message' => 'Teacher Not Found'
+//                ], 404);
+//            }
+//
+//            $teacher->user->update([
+//                'Full_name' => $request->Full_name,
+//                'username' => $request->username,
+//                'email' => $request->email,
+//                'address' => $request->address,
+//                'DOB' => $request->dob,
+//                'gender' => $request->gender,
+//                'phone' => $request->phone,
+//                'image' => $request->image,
+//            ]);
+//
+//            if ($request->has('password')) {
+//                $teacher->user->update(['password' => bcrypt($request->password)]);
+//            }
+//
+//            $teacher->update([
+//                'salary' => $request->salary,
+//                'degree' => $request->degree,
+//            ]);
+//
+//            return response()->json([
+//                'message' => 'Teacher updated successfully',
+//                'teacher' => $teacher->load('user')
+//            ], 200);
+//        } catch (Exception $e) {
+//            return response()->json([
+//                'message' => 'Something went wrong',
+//                'error' => $e->getMessage()
+//            ], 500);
+//        }
+//    }
+
+// update image
+    public function update(Request $request, $id)
     {
         try {
-            $teacher = Teacher::find($id);
-            if (!$teacher) {
-                return response()->json([
-                    'message' => 'Teacher Not Found'
-                ], 404);
-            }
+            // Fetch the user by ID
+            $user = User::findOrFail($id);
 
-            $teacher->user->update([
-                'Full_name' => $request->Full_name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'address' => $request->address,
-                'DOB' => $request->dob,
-                'gender' => $request->gender,
-                'phone' => $request->phone,
-                'image' => $request->image,
+            // Validate input data
+            $validatedData = $request->validate([
+                'Full_name' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'password' => 'nullable|string|min:6',
+                'address' => 'nullable|string|max:255',
+                'DOB' => 'nullable|date',
+                'gender' => 'nullable|string|in:male,female',
+                'phone' => 'nullable|string|max:20',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+                'salary' => 'nullable|numeric',
+                'degree' => 'nullable|string|max:255',
             ]);
 
-            if ($request->has('password')) {
-                $teacher->user->update(['password' => bcrypt($request->password)]);
+
+
+            // Prepare the data for updating the user
+            $userData = [
+                'Full_name' => $validatedData['Full_name'],
+                'username' => $validatedData['username'],
+                'email' => $validatedData['email'],
+                'address' => $validatedData['address'] ?? $user->address,
+                'DOB' => $validatedData['DOB'] ?? $user->DOB,
+                'gender' => $validatedData['gender'] ?? $user->gender,
+                'phone' => $validatedData['phone'] ?? $user->phone,
+            ];
+
+            // Hash the password if provided
+            if (!empty($validatedData['password'])) {
+                $userData['password'] = bcrypt($validatedData['password']);
             }
 
-            $teacher->update([
-                'salary' => $request->salary,
-                'degree' => $request->degree,
-            ]);
+            // Handle image upload if provided
+            if ($request->hasFile('image')) {
+                // Delete old image if it exists
+                if ($user->image && Storage::disk('public')->exists("teacher/{$user->image}")) {
+                    Storage::disk('public')->delete("teacher/{$user->image}");
+                }
+
+                $imageFile = $request->file('image');
+                $filename = time() . '_' . preg_replace(
+                        '/\s+/',
+                        '_',
+                        pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME)
+                    ) . '.' . $imageFile->getClientOriginalExtension();
+                $imageFile->storeAs('public/teacher', $filename);
+                $userData['image'] = $filename;
+            }
+
+            // Update the user
+            $user->update($userData);
+
+            // Prepare teacher data
+            $teacherData = [
+                'salary' => $validatedData['salary'] ?? ($user->teacher->salary ?? null),
+                'degree' => $validatedData['degree'] ?? ($user->teacher->degree ?? null),
+            ];
+
+            // Update or create the teacher record
+            if ($user->teacher) {
+                $user->teacher->update($teacherData);
+            } else {
+                $teacher = Teacher::create(array_merge($teacherData, ['user_id' => $user->id]));
+                $user->teacher_id = $teacher->id;
+                $user->save();
+            }
+
+
 
             return response()->json([
-                'message' => 'Teacher updated successfully',
-                'teacher' => $teacher->load('user')
+                'status' => true,
+                'message' => "Teacher updated successfully",
+                'user' => $user->fresh()->load('teacher'),
             ], 200);
-        } catch (Exception $e) {
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'message' => 'Something went wrong',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
-
     public function destroy($id)
     {
-        $teacher = Teacher::find($id);
+        $teacher = User::find($id);
         if (!$teacher) {
             return response()->json([
                 'message' => 'Teacher Not Found'
             ], 404);
         }
-        $teacher->user->delete();
+        $teacher->delete();
         return response()->json([
             'message' => 'Teacher deleted successfully'
         ], 200);
