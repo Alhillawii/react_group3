@@ -53,7 +53,7 @@ export default function Supervisors() {
     return (
         <div className="container">
             <div className="page-inner">
-                <div className="page-header">
+                <div>
                     <h3 className="fw-bold mb-3">Supervisors Info</h3>
                 </div>
                 <div className="row">
@@ -120,7 +120,7 @@ export default function Supervisors() {
                                                                 className="btn btn-link btn-info"
                                                                 onClick={() => handleShowMoreInfo(user.id)}
                                                             >
-                                                                <i className="fa fa-info-circle" />
+                                                                <i className="fa fa-eye" />
                                                             </button>
 
                                                     </div>
