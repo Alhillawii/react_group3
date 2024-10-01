@@ -26,6 +26,7 @@ import Teachers from "./pages/dashboard/Teachers.jsx";
 import AddTeacher from './pages/dashboard/AddTeacher.jsx';
 import EditTeacher from './pages/dashboard/EditTeacher.jsx';
 import TeacherDetails from './pages/dashboard/TeacherDetails.jsx';
+import Adminprof from "./pages/dashboard/Adminprof.jsx";
 
 import Events from './pages/dashboard/Events.jsx';
 
@@ -37,6 +38,7 @@ const AdminRoutes = () => (
         <Route path="classes" element={<Classes />} />
         <Route path="assigments" element={<Assigment />} />
         <Route path="subjects" element={<Subjects />} />
+        <Route path="adminprof" element={<Adminprof />} />
 
         {/*  supervisor routes  */}
         <Route path="supervisors" element={<Supervisors />} />

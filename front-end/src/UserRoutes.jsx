@@ -6,8 +6,7 @@ import Home from './pages/userside/Home.jsx';
 import AboutLand from './components/userside/About.jsx';
 import ServiceLand from './components/userside/Service.jsx';
 
-import AboutLand from './components/userside/About';
-import ServiceLand from './components/userside/Service';
+
 
 import TestimonialLand from './components/userside/testimonial';
 import CoursesLand from './components/userside/Courses';

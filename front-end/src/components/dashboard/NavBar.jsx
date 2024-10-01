@@ -1,7 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link if using React Router
+import { Link, useNavigate } from 'react-router-dom';
+import  { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import axios from 'axios';
+
 
 function NavBar() {
+    const { auth ,setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
+    // console.log(auth)
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('http://127.0.0.1:8000/api/logout', {}, {
+                headers: {
+                    'Authorization': `Bearer ${auth.token}`
+                }
+            });
+
+            // Clear the auth context
+            setAuth(null);
+
+            // Redirect to login page or home page
+            navigate('/login');
+        } catch (err) {
+            console.log('Error details:', err.response ? err.response.data : err.message);
+        }
+    };
+
     return (
         <div className="main-header">
             <div className="main-header-logo">
@@ -39,7 +66,7 @@ function NavBar() {
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Profile
+                                    {auth.user.username}
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li>
@@ -54,18 +81,15 @@ function NavBar() {
                                         </Link>
                                     </li>
                                     <li>
-    <Link 
-        className="dropdown-item" 
-        to="/logout" 
-        onClick={(e) => {
-            e.preventDefault(); // Prevent default anchor behavior
-            window.scrollTo(0, 0); // Ensure the window doesn't scroll when navigating
-        }}
-    >
-        <i className="fas fa-sign-out-alt"></i> {/* Font Awesome Logout Icon */}
-        Logout
-    </Link>
-</li>
+                                        <a
+                                            className="dropdown-item"
+                                            href="#"
+                                            onClick={handleLogout}
+                                        >
+                                            <i className="fas fa-sign-out-alt"></i>
+                                            Logout
+                                        </a>
+                                    </li>
 
                                 </ul>
                             </li>

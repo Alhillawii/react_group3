@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
+import  { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext.jsx';
 
 function SideBar() {
+    const { auth } = useContext(AuthContext);
+
     return (
         <div className="sidebar" data-background-color="dark">
             <div className="sidebar-logo">
@@ -51,21 +55,17 @@ function SideBar() {
                                 <p>Messages</p>
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to="/admin/managers" className={({isActive}) => isActive ? "active" : ""}>
-                                <p>Managers</p>
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/admin/supervisors" className={({isActive}) => isActive ? "active" : ""}>
-                                <p>Supervisors</p>
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to="/admin/feedback" className={({isActive}) => isActive ? "active" : ""}>
-                                <p>Feedback</p>
-                            </NavLink>
-                        </li>
+
+                        {
+                            (auth.role_id === 1 || auth.role_id === 3) && (
+                                <li className="nav-item">
+                                    <NavLink to="/admin/feedback" className={({isActive}) => isActive ? "active" : ""}>
+                                        <p>Feedback</p>
+                                    </NavLink>
+                                </li>
+                            )
+                        }
+
                         <li className="nav-item">
                             <NavLink to="/admin/assigments" className={({isActive}) => isActive ? "active" : ""}>
                                 <p>Assignment</p>
@@ -88,11 +88,36 @@ function SideBar() {
                                 className="collapsed"
                                 aria-expanded="false"
                             >
-                                <i className="fas fa-home"/>
+
                                 <p>Events</p>
                             </NavLink>
                             <div className="collapse"></div>
                         </li>
+
+                        {
+                            (auth.role_id === 3 || auth.role_id === 2) && (
+                                <>
+
+                            <li className="nav-item">
+                            <NavLink to="/admin/supervisors" className={({isActive}) => isActive ? "active" : ""}>
+                        <p>Supervisors</p>
+                    </NavLink>
+                </li>
+                                </>
+                            )
+                        }
+
+
+                        {
+                            auth.role_id === 3 && (
+                                <li className="nav-item">
+                                    <NavLink to="/admin/managers" className={({isActive}) => isActive ? "active" : ""}>
+                                        <p>Managers</p>
+                                    </NavLink>
+                                </li>
+                            )
+                        }
+
                     </ul>
                 </div>
             </div>

@@ -110,7 +110,7 @@ export default function Event() {
   return (
     <div className="container">
       <div className="page-inner">
-        <div className="page-header">
+        <div>
           <h3 className="fw-bold mb-3">Event Info</h3>
         </div>
         <div className="row">

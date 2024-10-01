@@ -238,7 +238,7 @@ export default function AddTeacher() {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary mt-3">Add Teacher</button>
+                    <button type="submit" className="btn btn-primary mt-3 mx-2">Add Teacher</button>
                     <button className="btn btn-secondary mt-3" onClick={() => navigate(-1)}>
                         Cancel
                     </button>

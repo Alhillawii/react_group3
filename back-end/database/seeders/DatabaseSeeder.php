@@ -7,6 +7,7 @@ use App\Models\Message;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -67,5 +68,6 @@ class DatabaseSeeder extends Seeder
         // Create Messages and Feedback
         Message::factory(50)->create();
         Feedback::factory(50)->create();
+         Event::factory()->count(10)->create();
     }
 }

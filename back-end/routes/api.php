@@ -11,6 +11,7 @@ use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AssigmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //----------------- Auth --------------------------------
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 //--------------- User ---------------------------------
 Route::get('users',[UserController::class,'index']);
 Route::get('users/{id}',[UserController::class,'show']);
@@ -93,8 +95,8 @@ Route::get('/assigments/{id}', [AssigmentController::class, 'show']);
 Route::put('/assigments/{id}', [AssigmentController::class, 'update']);
 Route::delete('/assigments/{id}', [AssigmentController::class, 'destroy']);
 //---------------- Events -----------------------------------------
-    Route::get('events', [EventController::class, 'index']);      
-    Route::get('/events/{id}', [EventController::class, 'show']); 
-    Route::post('/add_event', [EventController::class, 'store']);     
-    Route::put('/eventUpdate/{id}', [EventController::class, 'update']); 
+    Route::get('events', [EventController::class, 'index']);
+    Route::get('/events/{id}', [EventController::class, 'show']);
+    Route::post('/add_event', [EventController::class, 'store']);
+    Route::put('/eventUpdate/{id}', [EventController::class, 'update']);
     Route::delete('/eventsDelete/{id}', [EventController::class, 'destroy']);
