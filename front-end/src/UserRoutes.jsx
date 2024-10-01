@@ -13,7 +13,8 @@ import CoursesLand from './components/userside/Courses';
 import FAQLand from './components/userside/FAQ';
 import Contact from './components/userside/ContactLand.jsx';
 import AmenitiesLand from './components/userside/Amenities.jsx'; 
-// import ContactLand from "./components/userside/ContactLand.jsx";
+// import UserProfile from './pages/userside/UserProfile.jsx';
+import Register from './components/Register.jsx'
 
 function UserRoutes() {
     return (
@@ -27,6 +28,8 @@ function UserRoutes() {
                 <Route path="testimonials" element={<TestimonialLand />} />
                 <Route path="faq" element={<FAQLand />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="userprofile" element={<Contact />} />
+                <Route path="/register" element={<Register />} />
             </Route>
         </Routes>
     )

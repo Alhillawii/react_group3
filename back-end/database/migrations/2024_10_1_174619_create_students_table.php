@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('national_img')->nullable();
             $table->string('parent_name');
             $table->foreignId('school_class_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('request_status')->default('pending');
             $table->softDeletes();
             $table->timestamps();
         });

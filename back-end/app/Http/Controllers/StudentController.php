@@ -28,13 +28,14 @@ class StudentController extends Controller
             $userData = [
                 'username' => $request->username,
                 'email' => $request->email,
-                'password' => bcrypt($request->password), // Always encrypt passwords
-                'role_id' => 0, // Assuming there's a role for students
+                'password' => bcrypt($request->password),
+                'role_id' => 0,
                 'Full_name' => $request->Full_name,
                 'address' => $request->address,
                 'DOB' => $request->DOB,
                 'phone' => $request->phone,
                 'gender' => $request->gender,
+                'request_status' => 'approved',
 
             ];
 
@@ -81,9 +82,6 @@ class StudentController extends Controller
 
         } catch (Exception $e) {
             DB::rollBack();
-
-
-
 
             return response()->json([
                 'message' => 'Something went wrong',

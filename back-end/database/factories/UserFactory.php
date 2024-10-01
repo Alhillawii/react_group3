@@ -68,14 +68,14 @@ class UserFactory extends Factory
 
         // If the user is a manager (role_id = 2)
         if ($user->role_id == 2) {
-            Manager::create([
+            Supervisor::create([
                 'id' => $user->id, // The manager ID will be the same as the user ID
             ]);
         }
 
         // If the user is a supervisor (role_id = 3)
         if ($user->role_id == 3) {
-            Supervisor::create([
+            Manager::create([
                 'id' => $user->id, // The supervisor ID will be the same as the user ID
             ]);
         }

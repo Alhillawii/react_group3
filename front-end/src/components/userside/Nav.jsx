@@ -1,13 +1,41 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext, useState} from 'react';
+import { Link,useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext.jsx';
+import axios from 'axios';
 
 export default function NavLand() {
     const [showServices, setShowServices] = useState(true);
+    const [showUserMenu, setShowUserMenu] = useState(false);
+    const { auth ,setAuth } = useContext(AuthContext);
+    const navigate = useNavigate();
+    console.log(auth)
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('http://127.0.0.1:8000/api/logout', {}, {
+                headers: {
+                    'Authorization': `Bearer ${auth.token}`
+                }
+            });
 
+            // Clear the auth context
+            setAuth(null);
+
+            // Redirect to login page or home page
+            navigate('/');
+        } catch (err) {
+            console.log('Error details:', err.response ? err.response.data : err.message);
+        }
+    };
     // Handle the click to toggle the dropdown
     const handleServicesClick = () => {
         setShowServices(prevState => !prevState);
     };
+
+    const handleUserMenuClick = () => {
+        setShowUserMenu(prevState => !prevState);
+    };
+
 
     return (
         <div>
@@ -51,6 +79,7 @@ export default function NavLand() {
                             >
                                 Services
                             </Link>
+
                             <div className={`dropdown-menu ${showServices ? "show" : ""}`}>
                                 <Link to="/services" className="dropdown-item">
                                     View Accreditation
@@ -64,9 +93,56 @@ export default function NavLand() {
                             Contact
                         </Link>
                     </div>
-                    <Link to="/login" className="btn py-4 px-lg-5 d-none d-lg-block pt-4" style={{ backgroundColor: '#06BBCC' , color: 'white' ,  fontSize:'1.1rem' }}>
-    Login <i className="fa fa-arrow-right ms-3" />
-</Link>
+
+
+                    {auth ? (
+                        // User is logged in
+                        auth.user.request_status === 'pending' ? (
+                            // Request status is pending
+                            <div className="d-none d-lg-flex align-items-center">
+            <span className="me-3" style={{ color: '#06BBCC', fontSize: '1rem' }}>
+                Your request is pending approval
+            </span>
+                                <button onClick={handleLogout} className="btn py-2 px-4" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1rem' }}>
+                                    Logout
+                                </button>
+                            </div>
+                        ) : auth.user.request_status === 'approved' ? (
+                            // Request status is approved
+                            <div className={`nav-item dropdown ${showUserMenu ? "show" : ""}`}>
+                                <a
+                                    className="btn py-4 px-lg-5 d-none d-lg-block"
+                                    onClick={handleUserMenuClick}
+                                    role="button"
+                                    aria-expanded={showUserMenu ? "true" : "false"}
+                                    style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}
+                                >
+                                    {auth.user.username} <i className="fa fa-caret-down ms-2" />
+                                </a>
+                                <div className={`dropdown-menu ${showUserMenu ? "show" : ""}`}>
+                                    <Link to="/userprofile" className="dropdown-item">My Account</Link>
+                                    <a onClick={handleLogout} className="dropdown-item" href="#">Logout</a>
+                                </div>
+                            </div>
+                        ) : (
+                            // Request status is neither pending nor approved (fallback)
+                            <div className="d-none d-lg-flex">
+                                <button onClick={handleLogout} className="btn py-4 px-lg-5" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}>
+                                    Logout
+                                </button>
+                            </div>
+                        )
+                    ) : (
+                        // User is not logged in
+                        <div className="d-none d-lg-flex">
+                            <Link to="/login" className="btn py-4 px-lg-5" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}>
+                                Login <i className="fa fa-arrow-right ms-3" />
+                            </Link>
+                            <Link to="/register" className="btn py-4 px-lg-5" style={{ backgroundColor: '#0dcaf0', color: 'white', fontSize: '1.1rem', marginLeft: '10px' }}>
+                                Register <i className="fa fa-user-plus ms-3" />
+                            </Link>
+                        </div>
+                    )}
 
                 </div>
             </nav>

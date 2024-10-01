@@ -128,6 +128,7 @@ export default function AddStudent() {
                             />
                             {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                         </div>
+
                     </div>
 
                     <div className="row">

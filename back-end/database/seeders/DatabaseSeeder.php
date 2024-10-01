@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create Students (role_id = 0)
-        User::factory()->count(20)->state(['role_id' => 0])->create()->each(function ($user) {
+        User::factory()->count(100)->state(['role_id' => 0])->create()->each(function ($user) {
             // Create a corresponding Student record and link it to the User
             $student = Student::factory()->create([
                 'id' => $user->id, // Student ID will match the User ID
@@ -41,33 +41,33 @@ class DatabaseSeeder extends Seeder
             $user->save();
         });
 
-        // Create Managers (role_id = 2)
-        User::factory()->count(20)->state(['role_id' => 2])->create()->each(function ($user) {
+        // Create Supervisors (role_id = 2)
+        User::factory()->count(5)->state(['role_id' => 2])->create()->each(function ($user) {
             // Create a corresponding Manager record and link it to the User
-            \App\Models\Manager::factory()->create([
+            \App\Models\Supervisor::factory()->create([
                 'id' => $user->id, // Manager ID will match the User ID
             ]);
 
             // Update the manager_id field in the User record (if needed)
-            $user->manager_id = $user->id;
-            $user->save();
-        });
-
-        // Create Supervisors (role_id = 3)
-        User::factory()->count(20)->state(['role_id' => 3])->create()->each(function ($user) {
-            // Create a corresponding Supervisor record and link it to the User
-            \App\Models\Supervisor::factory()->create([
-                'id' => $user->id, // Supervisor ID will match the User ID
-            ]);
-
-            // Update the supervisor_id field in the User record (if needed)
             $user->supervisor_id = $user->id;
             $user->save();
         });
 
+        // Create Managers (role_id = 3)
+        User::factory()->count(2)->state(['role_id' => 3])->create()->each(function ($user) {
+            // Create a corresponding Supervisor record and link it to the User
+            \App\Models\Manager::factory()->create([
+                'id' => $user->id, // Supervisor ID will match the User ID
+            ]);
+
+            // Update the supervisor_id field in the User record (if needed)
+            $user->manager_id = $user->id;
+            $user->save();
+        });
+
         // Create Messages and Feedback
-        Message::factory(50)->create();
-        Feedback::factory(50)->create();
+        Message::factory(10)->create();
+        Feedback::factory(10)->create();
          Event::factory()->count(10)->create();
     }
 }

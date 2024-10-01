@@ -19,7 +19,8 @@ class Student extends Model
         'parent_name',
         'national_img',
         'id',
-        'school_class_id'
+        'school_class_id',
+        'request_status'
     ];
 
     public function class() {
