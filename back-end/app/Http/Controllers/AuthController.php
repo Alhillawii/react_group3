@@ -21,12 +21,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            $studentReq = auth()->user()->student->request_status;
+//            $studentReq = auth()->user()->student->request_status;
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'user' => $user,
-                'studentReq' => $studentReq,
                 'token' => $token,
                 'role_id' => $user->role_id,
             ]);

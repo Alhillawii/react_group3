@@ -13,8 +13,8 @@ function Statics({heading,content,icon}) {
                     </div>
                     <div className="col col-stats ms-3 ms-sm-0">
                         <div className="numbers">
-                            <p className="card-category">Order</p>
-                            <h4 className="card-title">576</h4>
+                            <p className="card-category">student</p>
+                            <h4 className="card-title">100</h4>
                         </div>
                     </div>
                 </div>

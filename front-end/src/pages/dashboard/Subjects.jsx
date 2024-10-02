@@ -79,7 +79,7 @@ export default function SubjectInfo() {
       const response = await axios.post('http://127.0.0.1:8000/api/subjects', newSubject);
       setSubjectData((prev) => [...prev, response.data]);
       setNewSubject({ subject_name: '', semester: '', school_class_id: '', teacher_id: '' });
-      $('#addRowModal').modal('hide'); 
+      $('#addRowModal');
     } catch (err) {
       console.error('Error adding subject', err);
     }
@@ -94,7 +94,7 @@ export default function SubjectInfo() {
     try {
       await axios.put(`http://127.0.0.1:8000/api/subjects/${editSubject.id}`, editSubject);
       setSubjectData((prev) => prev.map((subject) => (subject.id === editSubject.id ? { ...subject, ...editSubject } : subject)));
-      $('#editRowModal').modal('hide'); // Hide the modal after editing
+      $('#editRowModal'); // Hide the modal after editing
     } catch (err) {
       console.error('Error editing subject', err);
     }

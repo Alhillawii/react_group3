@@ -20,7 +20,7 @@ function UserStatistics() {
                         legendColor: '#f3545d',
                         fill: true,
                         borderWidth: 2,
-                        data: [154, 184, 175, 203, 210, 231, 240, 278, 252, 312, 320, 374]
+                        data: [154, 184, 175, 203, 210, 231, 240, 278, 252, 312, 320, 100]
                     },
                     {
                         label: "New Visitors",
@@ -31,7 +31,7 @@ function UserStatistics() {
                         legendColor: '#fdaf4b',
                         fill: true,
                         borderWidth: 2,
-                        data: [256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 521]
+                        data: [256, 230, 245, 287, 240, 250, 230, 295, 331, 431, 456, 200]
                     },
                     {
                         label: "Active Users",
@@ -42,7 +42,7 @@ function UserStatistics() {
                         legendColor: '#177dff',
                         fill: true,
                         borderWidth: 2,
-                        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 900]
+                        data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 127]
                     }
                 ]
             },
