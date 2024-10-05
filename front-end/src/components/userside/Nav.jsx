@@ -97,48 +97,28 @@ export default function NavLand() {
 
                     {auth ? (
                         // User is logged in
-                        auth.user.request_status === 'pending' ? (
-                            // Request status is pending
-                            <div className="d-none d-lg-flex align-items-center">
-            <span className="me-3" style={{ color: '#06BBCC', fontSize: '1rem' }}>
-                Your request is pending approval
-            </span>
-                                <button onClick={handleLogout} className="btn py-2 px-4" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1rem' }}>
-                                    Logout
-                                </button>
+                        <div className={`nav-item dropdown ${showUserMenu ? "show" : ""}`}>
+                            <a
+                                className="btn py-4 px-lg-5 d-none d-lg-block"
+                                onClick={handleUserMenuClick}
+                                role="button"
+                                aria-expanded={showUserMenu ? "true" : "false"}
+                                style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}
+                            >
+                                {auth.user.username} <i className="fa fa-caret-down ms-2" />
+                            </a>
+                            <div className={`dropdown-menu ${showUserMenu ? "show" : ""}`}>
+                                <Link to="/userprofile" className="dropdown-item">My Account</Link>
+                                <a onClick={handleLogout} className="dropdown-item" href="#">Logout</a>
                             </div>
-                        ) : auth.user.request_status === 'approved' ? (
-                            // Request status is approved
-                            <div className={`nav-item dropdown ${showUserMenu ? "show" : ""}`}>
-                                <a
-                                    className="btn py-4 px-lg-5 d-none d-lg-block"
-                                    onClick={handleUserMenuClick}
-                                    role="button"
-                                    aria-expanded={showUserMenu ? "true" : "false"}
-                                    style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}
-                                >
-                                    {auth.user.username} <i className="fa fa-caret-down ms-2" />
-                                </a>
-                                <div className={`dropdown-menu ${showUserMenu ? "show" : ""}`}>
-                                    <Link to="/userprofile" className="dropdown-item">My Account</Link>
-                                    <a onClick={handleLogout} className="dropdown-item" href="#">Logout</a>
-                                </div>
-                            </div>
-                        ) : (
-                            // Request status is neither pending nor approved (fallback)
-                            <div className="d-none d-lg-flex">
-                                <button onClick={handleLogout} className="btn py-4 px-lg-5" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}>
-                                    Logout
-                                </button>
-                            </div>
-                        )
+                        </div>
                     ) : (
                         // User is not logged in
                         <div className="d-none d-lg-flex">
-                            <Link to="/login" className="btn py-4 px-lg-5" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem' }}>
+                            <Link to="/login" className="btn py-4 px-lg-5" style={{ backgroundColor: '#06BBCC', color: 'white', fontSize: '1.1rem', marginRight: '10px' }}>
                                 Login <i className="fa fa-arrow-right ms-3" />
                             </Link>
-                            <Link to="/register" className="btn py-4 px-lg-5" style={{ backgroundColor: '#0dcaf0', color: 'white', fontSize: '1.1rem', marginLeft: '10px' }}>
+                            <Link to="/register" className="btn py-4 px-lg-5" style={{ backgroundColor: '#0dcaf0', color: 'white', fontSize: '1.1rem' }}>
                                 Register <i className="fa fa-user-plus ms-3" />
                             </Link>
                         </div>
